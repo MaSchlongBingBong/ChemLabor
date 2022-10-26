@@ -205,4 +205,6 @@ shape = SubResource( 25 )
 [node name="CollisionShape" type="CollisionShape" parent="Cup"]
 shape = SubResource( 26 )
 
+[node name="PickupCenter" type="Spatial" parent="Cup"]
+
 [editable path="FPController"]
