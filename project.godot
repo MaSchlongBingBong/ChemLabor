@@ -44,24 +44,17 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ChemLab"
+config/name="test"
 config/icon="res://icon.png"
-
-[autoload]
-
-PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
-IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
-UserData="*res://addons/github-integration/scripts/user_data.gd"
-RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
 
 [editor]
 
 version_control_autoload_on_startup=true
 version_control_plugin_name="GitAPI"
 
-[editor_plugins]
+[gdnative]
 
-enabled=PoolStringArray(  )
+singletons=[  ]
 
 [gui]
 
