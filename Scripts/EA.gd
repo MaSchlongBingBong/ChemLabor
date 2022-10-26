@@ -4,6 +4,7 @@ extends Spatial
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	load("res://Scripts/test.json")
 	spawnSphere(1, Vector3(1,0,0))
 	spawnSphere(0.5, Vector3(1.5,1,0))
 	spawnSphere(0.5, Vector3(1.5,-1,0))
