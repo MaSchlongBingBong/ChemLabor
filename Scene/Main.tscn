@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_turn.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/godot-xr-tools/assets/right_physics_hand.tscn" type="PackedScene" id=9]
 [ext_resource path="res://addons/godot-xr-tools/assets/left_physics_hand.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scripts/EA.gd" type="Script" id=11]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -94,5 +95,9 @@ shape = SubResource( 7 )
 [node name="MeshInstance" type="MeshInstance" parent="Cube/CollisionShape2"]
 mesh = SubResource( 8 )
 material/0 = ExtResource( 4 )
+
+[node name="EA" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413717, 1.58461, -4.21775 )
+script = ExtResource( 11 )
 
 [editable path="FPController"]
