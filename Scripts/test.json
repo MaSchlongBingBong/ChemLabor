@@ -1,0 +1,82 @@
+{
+    "name": "add brom to ethen",
+    "steps": [
+        {
+            "type": "Nop",
+            "duration": 5
+        },
+        {
+            "type": "deleteBond",
+            "duration": 1,
+            "data": {
+                "idx": 5
+            }
+        },
+        {
+            "type": "deleteBond",
+            "duration": 1,
+            "data": {
+                "idx": 0
+            }
+        },
+        {
+            "type": "createBond",
+            "duration": 0,
+            "data": {
+                "from": 0,
+                "to": 6
+            }
+        },
+        {
+            "type": "createBond",
+            "duration": 0.5,
+            "data": {
+                "from": 1,
+                "to": 6
+            }
+        },
+        {
+            "type": "moveAtom",
+            "duration": 0.5,
+            "data": {
+                "idx": 6,
+                "pos": {"x": -1, "y": 2, "z": 0}
+            }
+        },
+        {
+            "type": "moveAtom",
+            "duration": 1,
+            "data": {
+                "idx": 7,
+                "pos": {"x": 1, "y": -2, "z": 0}
+            }
+        },
+        {
+            "type": "createBond",
+            "duration": 0,
+            "data": {
+                "from": 1,
+                "to": 7
+            }
+        },
+        {
+            "type": "deleteBond",
+            "duration": 0,
+            "data": {
+                "idx": 7
+            }
+        },
+        {
+            "type": "Nop",
+            "duration": 2
+        },
+        {
+            "type": "playAudio",
+            "duration": 5,
+            "data": {
+                "idx": 0,
+                "seek": 3
+            }
+        }
+    ]
+}
