@@ -47,7 +47,7 @@ func physics_movement(delta: float, player_body: XRToolsPlayerBody, _disabled: b
 
 	# Read the left/right joystick axis
 	var left_right := _controller.get_joystick_axis(0)
-	if abs(left_right) <= 0.1:
+	if abs(left_right) <= 0.1 or not _controller.is_button_pressed(14):
 		# Not turning
 		_turn_step = 0.0
 		return
