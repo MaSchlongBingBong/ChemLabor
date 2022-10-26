@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="test"
+config/name="ChemLab"
 config/icon="res://icon.png"
 
 [editor]
@@ -52,9 +52,13 @@ config/icon="res://icon.png"
 version_control_autoload_on_startup=true
 version_control_plugin_name="GitAPI"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/godot-openxr/plugin.cfg" )
+
 [gdnative]
 
-singletons=[  ]
+singletons=[ "res://addons/godot-openxr/config/godot_openxr.gdnlib" ]
 
 [gui]
 
