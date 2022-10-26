@@ -8,16 +8,12 @@
 [ext_resource path="res://addons/godot-xr-tools/functions/function_pickup.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/godot-xr-tools/objects/pickable.tscn" type="PackedScene" id=7]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_turn.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/godot-xr-tools/assets/right_physics_hand.tscn" type="PackedScene" id=9]
+[ext_resource path="res://addons/godot-xr-tools/assets/left_physics_hand.tscn" type="PackedScene" id=10]
 
 [sub_resource type="BoxShape" id=1]
 
 [sub_resource type="CubeMesh" id=2]
-
-[sub_resource type="CubeMesh" id=3]
-size = Vector3( 0.2, 0.2, 0.2 )
-
-[sub_resource type="CubeMesh" id=4]
-size = Vector3( 0.2, 0.2, 0.2 )
 
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 0.5, 0.5, 0.5 )
@@ -49,27 +45,29 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393306, 0 )
 current = true
 far = 1000.0
 
-[node name="MeshInstance" type="MeshInstance" parent="FPController/LeftHandController" index="0"]
-mesh = SubResource( 3 )
-
-[node name="FunctionTeleport" parent="FPController/LeftHandController" index="1" instance=ExtResource( 5 )]
+[node name="FunctionTeleport" parent="FPController/LeftHandController" index="0" instance=ExtResource( 5 )]
 camera = NodePath("../../ARVRCamera")
 teleport_button = 14
 
-[node name="FunctionPickup" parent="FPController/LeftHandController" index="2" instance=ExtResource( 6 )]
+[node name="FunctionPickup" parent="FPController/LeftHandController" index="1" instance=ExtResource( 6 )]
 
-[node name="MeshInstance" type="MeshInstance" parent="FPController/RightHandController" index="0"]
-mesh = SubResource( 4 )
+[node name="LeftPhysicsHand" parent="FPController/LeftHandController" index="2" instance=ExtResource( 10 )]
+collision_layer = 131072
+margin = 0.004
 
-[node name="MovementDirect" parent="FPController/RightHandController" index="1" instance=ExtResource( 2 )]
+[node name="MovementDirect" parent="FPController/RightHandController" index="0" instance=ExtResource( 2 )]
 enabled = true
 order = 10
 max_speed = 2.0
 strafe = true
 
-[node name="FunctionPickup" parent="FPController/RightHandController" index="2" instance=ExtResource( 6 )]
+[node name="FunctionPickup" parent="FPController/RightHandController" index="1" instance=ExtResource( 6 )]
 
-[node name="MovementTurn" parent="FPController/RightHandController" index="3" instance=ExtResource( 8 )]
+[node name="MovementTurn" parent="FPController/RightHandController" index="2" instance=ExtResource( 8 )]
+
+[node name="RightPhysicsHand" parent="FPController/RightHandController" index="3" instance=ExtResource( 9 )]
+collision_layer = 131072
+margin = 0.004
 
 [node name="PlayerBody" parent="FPController" instance=ExtResource( 3 )]
 
@@ -84,6 +82,8 @@ mesh = SubResource( 6 )
 
 [node name="Cube" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.236132, 1.33387, -4.2994 )
+collision_layer = 131073
+collision_mask = 131073
 reset_transform_on_pickup = false
 picked_up_layer = 1
 
