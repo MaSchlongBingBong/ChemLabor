@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 [gd_scene load_steps=43 format=2]
-=======
-[gd_scene load_steps=89 format=2]
->>>>>>> c50c259 (added Testtube Holder and wash can, wheel.material must stay in models or game crashes. Moving to different folder and reapplying the material doesn't work for some reason)
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -21,11 +17,6 @@
 [ext_resource path="res://Modells/Cup.obj" type="ArrayMesh" id=15]
 [ext_resource path="res://Modells/Burner.obj" type="ArrayMesh" id=16]
 [ext_resource path="res://Materials/glass.tres" type="Material" id=18]
-<<<<<<< HEAD
-=======
-[ext_resource path="res://Modells/wash can.obj" type="ArrayMesh" id=19]
-[ext_resource path="res://Scene/TestTubeHolder.tscn" type="PackedScene" id=20]
->>>>>>> c50c259 (added Testtube Holder and wash can, wheel.material must stay in models or game crashes. Moving to different folder and reapplying the material doesn't work for some reason)
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.5, 0.5, 0.5 )
@@ -159,11 +150,7 @@ margin = 0.004
 [node name="PlayerBody" parent="FPController" instance=ExtResource( 3 )]
 
 [node name="Cube" parent="." instance=ExtResource( 7 )]
-<<<<<<< HEAD
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.236132, 1.33387, -3.88814 )
-=======
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.236132, 1.33387, -3.95855 )
->>>>>>> c50c259 (added Testtube Holder and wash can, wheel.material must stay in models or game crashes. Moving to different folder and reapplying the material doesn't work for some reason)
 collision_layer = 131073
 collision_mask = 131073
 reset_transform_on_pickup = false
@@ -290,8 +277,5 @@ shape = SubResource( 31 )
 
 [node name="PickupCenter" type="Spatial" parent="Burner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.162248, 0 )
-
-[node name="TestTubeHolder" parent="." instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0720308, 1.18667, -3.62055 )
 
 [editable path="FPController"]
