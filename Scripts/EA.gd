@@ -26,6 +26,9 @@ var mol = {
 var atomObjects = []
 var bondObjects = []
 
+export var test: int
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var file = File.new()
