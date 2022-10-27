@@ -38,8 +38,28 @@ var mol = {
 		{
 			from = 0,
 			to = 1,
-			count = 2
-		}
+			number = 2
+		},
+		{
+			from = 0,
+			to = 2,
+			number = 1
+		},
+		{
+			from = 0,
+			to = 3,
+			number = 1
+		},
+		{
+			from = 1,
+			to = 4,
+			number = 1
+		},
+		{
+			from = 1,
+			to = 5,
+			number = 1
+		},
 	]
 }
 
@@ -80,9 +100,11 @@ static func get_children_of_type(node: Node, child_type):
 
 func generate_molecule():
 	atomObjects = [];
+	atomObjects.resize(len(mol.atoms))
 	bondObjects = [];
+	bondObjects.resize(len(mol.bonds))
 
-	for child in get_children():
+	for child in get_children_of_type(self,CollisionShape):
 		child.queue_free()
 	
 
@@ -93,32 +115,38 @@ func generate_molecule():
 		var m = SpatialMaterial.new()
 		m.albedo_color = atom_colors.get(atom.name,Color("#ff00ff"))
 		get_child_of_type(ao,MeshInstance).set_surface_material(0,m)
-		#atomObjects[i] = ao;
+		atomObjects[i] = ao;
 
-	#foreach (Bond bond in bonds)
-	# for (int b = 0; b < bonds.Length; b++)
-	# {
-	# 	Bond bond = bonds[b];
-	# 	for (int i = 1; i <= bond.number; i++)
-	# 	{
-	# 		Atom from = atoms[bond.from];
-	# 		Atom to = atoms[bond.to];
-	# 		atoms[bond.from].AddBond(b);
-	# 		atoms[bond.to].AddBond(b);
-	# 		GameObject bo = Instantiate(bondObject);
-	# 		bo.transform.SetParent(transform);
-	# 		bo.name = from.name + " - " + to.name + " [" + b + "," + i + "]";
-	# 		bo.transform.localPosition = bond.number > 1 ? from.pos + (new Vector3(0,0.1f * (i*2 - 3),0)) : from.pos;
-	# 		//bo.transform.LookAt(to.pos + transform.position);
-	# 		bo.transform.forward = atomObjects[bond.to].transform.position - atomObjects[bond.from].transform.position;
-	# 		float dist = (to.pos - from.pos).magnitude/2;
-	# 		float curr = 0.1f * (from.scale + to.scale)/2;
-	# 		bo.transform.localScale = new Vector3(curr,curr,dist);
-	# 		bo.GetComponentInChildren<MeshRenderer>().material = mats.GetValueOrDefault(to.name);
-	# 		///TODO: will overwrite double bonds .... pls fix
-	# 		bondObjects[b] = bo;
-	# 	}
-	# }
+	for b in range(len(mol.bonds)):
+		var bond = mol.bonds[b];
+		for i in range(bond.number):
+			var from = mol.atoms[bond.from];
+			var to = mol.atoms[bond.to];
+			# atoms[bond.from].AddBond(b);
+			# atoms[bond.to].AddBond(b);
+			var curr = 0.1 * (from.scale + to.scale)/2;
+			var dist = (dict2vec(to.pos) - dict2vec(from.pos)).length();
+			var bo = spawnCylinder(curr,dist)
+			bo.name = from.name + " - " + to.name + " [" + str(b) + "," + str(i) + "]";
+			#bo.transform.localPosition = bond.number > 1 ? from.pos + (new Vector3(0,0.1f * (i*2 - 3),0)) : from.pos;
+			var trans = dict2vec(from.pos)
+			bo.translation = trans
+			bo.look_at(atomObjects[bond.to].global_translation, Vector3.UP);
+			if bond.number > 1:
+				trans = trans + (Vector3(0,0.1 * ((i+1)*2 - 3),0))
+			bo.translation = trans
+
+			bo.translate(Vector3(0,0,-dist/2));
+			bo.rotate_object_local(Vector3(1,0,0),PI/2)
+
+			var m = SpatialMaterial.new()
+			m.albedo_color = atom_colors.get(to.name,Color("#ff00ff"))
+			get_child_of_type(bo,MeshInstance).set_surface_material(0,m)
+			# ///TODO: will overwrite double bonds .... pls fix
+			bondObjects[b] = bo;
+
+func dict2vec(dict):
+	return Vector3(dict.x,dict.y,dict.z)
 
 func spawnSphere(diameter: float, pos: Vector3):
 	var collision_node = CollisionShape.new()
@@ -133,6 +161,22 @@ func spawnSphere(diameter: float, pos: Vector3):
 	collision_node.add_child(mesh_node)
 	add_child(collision_node)
 	collision_node.translation = pos
+	return collision_node
+
+func spawnCylinder(radius, length):
+	var collision_node = CollisionShape.new()
+	var mesh_node = MeshInstance.new()
+	var cylinder_mesh = CylinderMesh.new()
+	cylinder_mesh.top_radius = radius
+	cylinder_mesh.bottom_radius = radius
+	cylinder_mesh.height = length
+	mesh_node.mesh = cylinder_mesh
+	var shape = CylinderShape.new()
+	shape.radius = radius
+	shape.height = length
+	collision_node.shape = shape
+	collision_node.add_child(mesh_node)
+	add_child(collision_node)
 	return collision_node
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -184,7 +184,7 @@ mesh = SubResource( 8 )
 material/0 = ExtResource( 4 )
 
 [node name="EA" type="RigidBody" parent="."]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.847646, 1.58461, -3.47131 )
+transform = Transform( 0.192708, -0.0311294, 0.0435284, -0.00140296, 0.159685, 0.12041, -0.0534957, -0.116325, 0.153645, 0.847646, 1.58461, -3.47131 )
 collision_layer = 131073
 collision_mask = 131073
 script = ExtResource( 11 )
