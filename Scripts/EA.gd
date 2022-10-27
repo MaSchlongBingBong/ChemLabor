@@ -12,6 +12,26 @@ var mol = {
 			name = "Carbon",
 			pos = {x=-1, y=0, z=0},
 			scale = 1
+		},
+		{
+			name = "Hydrogen",
+			pos = {x=1.5,y=1,z=0},
+			scale=0.5
+		},
+		{
+			name = "Hydrogen",
+			pos = {x=1.5,y=-1,z=0},
+			scale=0.5
+		},
+		{
+			name = "Hydrogen",
+			pos = {x=-1.5,y=1,z=0},
+			scale=0.5
+		},
+		{
+			name = "Hydrogen",
+			pos = {x=-1.5,y=-1,z=0},
+			scale=0.5
 		}
 	],
 	bonds = [
@@ -25,9 +45,9 @@ var mol = {
 
 var atomObjects = []
 var bondObjects = []
+	
 
-export var test: int
-
+export(Dictionary) var atom_colors;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -71,7 +91,7 @@ func generate_molecule():
 		var ao = spawnSphere(atom.scale, Vector3(atom.pos.x,atom.pos.y,atom.pos.z))
 		ao.name = atom.name + " [" + str(i) + "]";
 		var m = SpatialMaterial.new()
-		m.albedo_color = Color( 1, 0, 1, 1 )
+		m.albedo_color = atom_colors.get(atom.name,Color("#ff00ff"))
 		ao.set_surface_material(0,m)
 		#get_child_of_type(ao,MeshInstance)
 		#atomObjects[i] = ao;
@@ -101,13 +121,18 @@ func generate_molecule():
 	# 	}
 	# }
 
-func spawnSphere(radius: float, pos: Vector3):
+func spawnSphere(diameter: float, pos: Vector3):
+	var collision_node = CollisionShape.new()
 	var mesh_node = MeshInstance.new()
 	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = radius
-	sphere_mesh.height = radius*2
+	sphere_mesh.radius = diameter/2
+	sphere_mesh.height = diameter
 	mesh_node.mesh = sphere_mesh
-	add_child(mesh_node)
+	var shape = SphereShape.new()
+	shape.radius = diameter/2
+	collision_node.shape = shape
+	collision_node.add_child(mesh_node)
+	add_child(collision_node)
 	mesh_node.translation = pos
 	return mesh_node
 
