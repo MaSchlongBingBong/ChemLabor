@@ -1,4 +1,4 @@
-extends Spatial
+extends "res://addons/godot-xr-tools/objects/pickable.gd"
 
 
 var mol = {
@@ -92,8 +92,7 @@ func generate_molecule():
 		ao.name = atom.name + " [" + str(i) + "]";
 		var m = SpatialMaterial.new()
 		m.albedo_color = atom_colors.get(atom.name,Color("#ff00ff"))
-		ao.set_surface_material(0,m)
-		#get_child_of_type(ao,MeshInstance)
+		get_child_of_type(ao,MeshInstance).set_surface_material(0,m)
 		#atomObjects[i] = ao;
 
 	#foreach (Bond bond in bonds)
@@ -133,8 +132,8 @@ func spawnSphere(diameter: float, pos: Vector3):
 	collision_node.shape = shape
 	collision_node.add_child(mesh_node)
 	add_child(collision_node)
-	mesh_node.translation = pos
-	return mesh_node
+	collision_node.translation = pos
+	return collision_node
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
