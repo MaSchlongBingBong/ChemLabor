@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -23,6 +23,8 @@
 [ext_resource path="res://Scene/TesTubeHolder.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Modells/Copper.obj" type="ArrayMesh" id=22]
 [ext_resource path="res://Materials/Copper.material" type="Material" id=23]
+[ext_resource path="res://Scripts/Burner.gd" type="Script" id=24]
+[ext_resource path="res://Scene/Fire.tscn" type="PackedScene" id=25]
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.5, 0.5, 0.5 )
@@ -274,11 +276,10 @@ shape = SubResource( 55 )
 [node name="PickupCenter" type="Spatial" parent="Cup"]
 
 [node name="Burner" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28776, 1.17153, -3.7069 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92934, 1.17153, -3.49399 )
 collision_layer = 131073
 collision_mask = 131073
-script = ExtResource( 14 )
-reset_transform_on_pickup = false
+script = ExtResource( 24 )
 
 [node name="Burner" type="MeshInstance" parent="Burner"]
 mesh = ExtResource( 16 )
@@ -301,6 +302,9 @@ shape = SubResource( 31 )
 
 [node name="PickupCenter" type="Spatial" parent="Burner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.162248, 0 )
+
+[node name="FireScene" parent="Burner" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 0.191, 0 )
 
 [node name="WashCan" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25732, 1.12469, -3.36041 )
