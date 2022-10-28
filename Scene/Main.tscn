@@ -309,6 +309,7 @@ shape = SubResource( 31 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.162248, 0 )
 
 [node name="WashCan" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.450297, 1.12469, -3.83119 )
 collision_layer = 131073
 collision_mask = 131073
 script = ExtResource( 14 )
@@ -316,32 +317,32 @@ reset_transform_on_pickup = false
 picked_up_layer = 1
 
 [node name="wash can" type="MeshInstance" parent="WashCan"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.497629, 1.16314, -3.52864 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 mesh = ExtResource( 17 )
 skeleton = NodePath("../../Table")
 
 [node name="CollisionShape6" type="CollisionShape" parent="WashCan"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.497629, 1.16314, -3.52864 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 shape = SubResource( 32 )
 
 [node name="CollisionShape5" type="CollisionShape" parent="WashCan"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.497629, 1.16314, -3.52864 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 shape = SubResource( 33 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="WashCan"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.497629, 1.16314, -3.52864 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 shape = SubResource( 34 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="WashCan"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.497629, 1.16314, -3.52864 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 shape = SubResource( 35 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="WashCan"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.497629, 1.16314, -3.52864 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 shape = SubResource( 36 )
 
 [node name="CollisionShape" type="CollisionShape" parent="WashCan"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.497629, 1.16314, -3.52864 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 shape = SubResource( 37 )
 
 [node name="PickupCenter" type="Spatial" parent="WashCan"]
