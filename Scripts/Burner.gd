@@ -27,7 +27,7 @@ export var Pcolor: Color = Color("1624ef")
 export var fireScale:Vector3 = Vector3(1,0.25,1)
 export var life_Time:float = 0.13
 
-
+var fire
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -61,7 +61,7 @@ func spawnParticle(amount: int):
 	fire.add_child(par)
 	fire.translation = Vector3(0,0.191,0)
 	fire.scale = fireScale
-	print(curve)
+	return fire
 
 
 func draw(par: Particles, pos: AABB, Cords: bool, dOrder: int, lifeTime: float):
@@ -101,7 +101,12 @@ func materialProperties(material: ParticlesMaterial, PtrailDivisor: int, Pemissi
 	return material
 
 func action():
-	spawnParticle(200)
+	if fire == null:
+		fire = spawnParticle(200)
+	else:
+		fire.queue_free()
+		fire = null
+
 
 
 
