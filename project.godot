@@ -276,6 +276,10 @@ config/name="ChemLab"
 run/main_scene="res://Scene/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Scripts/Global.gd"
+
 [editor]
 
 version_control_autoload_on_startup=true

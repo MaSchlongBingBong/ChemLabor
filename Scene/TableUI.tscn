@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Font/CALIBRI.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://Themes/default.tres" type="Theme" id=2]
+[ext_resource path="res://Scripts/resetButton.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/buttons.tres" type="ButtonGroup" id=4]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.13, 0.13, 0.13, 0.462745 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 240
+font_data = ExtResource( 1 )
+
+[node name="Panel" type="Panel"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Button" type="Button" parent="CenterContainer" groups=["reset"]]
+margin_left = 160.0
+margin_top = 240.0
+margin_right = 1760.0
+margin_bottom = 840.0
+rect_min_size = Vector2( 1600, 600 )
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 1 )
+group = ExtResource( 4 )
+text = "Reset Table"
+script = ExtResource( 3 )
