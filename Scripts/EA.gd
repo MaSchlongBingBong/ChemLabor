@@ -83,28 +83,32 @@ func nextDrawStep(delta):
 		currentMoveableAtom.atomObject.translation = lerp(currentMoveableAtom.from, currentMoveableAtom.to, currentMoveableAtom.timer/currentMoveableAtom.time);
 		
 		#Move Bonds
-		for i in range(len(currentMoveableAtom.bondObjects)):
-			var bo = currentMoveableAtom.bondObjects[i];
-			var from = bo.translation;
-			var to = currentMoveableAtom.atomObject.translation;
-			#bo.transform.LookAt(to.pos + transform.position);
-			var dir = currentMoveableAtom.atomObject.global_translation - bo.global_translation
+		for i in currentMoveableAtom.atom.bonds:
+			var bo = bondObjects[i]
+			var bond = mol.bonds[i]
+			var from = mol.atoms[bond.from];
+			var dist = (atomObjects[bond.to].translation - atomObjects[bond.from].translation).length();
+			var trans = dict2vec(from.pos)
+			bo.translation = trans
+			var dir = atomObjects[bond.to].global_translation - bo.global_translation
 			if Vector3.UP.cross(dir) != Vector3():
-				bo.look_at(currentMoveableAtom.atomObject.global_translation, Vector3.UP);
+				bo.look_at(atomObjects[bond.to].global_translation, Vector3.UP);
 			else:
 				bo.rotate_x(sign(dir.y) * PI/2)
-			
-			var dist = (to - from).length();
-			var curr = bo.scale.x;
+			if bond.number > 1:
+				trans = trans + (Vector3(0,0.1 * ((i+1)*2 - 3),0))
+			bo.translation = trans
+
 			bo.translate(Vector3(0,0,-dist/2));
 			bo.rotate_object_local(Vector3(1,0,0),PI/2)
 
+			bo.shape.height = dist
+			get_child_of_type(bo,MeshInstance).mesh.height = dist
 			
-			##bo.transform.localScale = Vector3(curr,curr,dist);
 
 		if currentMoveableAtom.timer >= currentMoveableAtom.time:
-			currentMoveableAtom = {};
-			generate_molecule();
+			currentMoveableAtom = {}
+			generate_molecule()
 
 func _process(delta):
 	nextDrawStep(delta)
@@ -135,11 +139,11 @@ func moveAtom(atomIndex: int, pos: Vector3, time: float):
 		bonds.append(bondObjects[idx]);
 
 	currentMoveableAtom = {
+		atom = atom,
 		from = dict2vec(atom.pos),
 		to = pos,
 		time = time,
 		timer = 0,
-		bondObjects = bonds,
 		atomObject = atomObjects[atomIndex],
 	};
 
