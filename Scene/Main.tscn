@@ -283,6 +283,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92934, 1.17153, -3.49399 )
 collision_layer = 131073
 collision_mask = 131073
 script = ExtResource( 24 )
+reset_transform_on_pickup = false
 
 [node name="Burner" type="MeshInstance" parent="Burner"]
 mesh = ExtResource( 16 )
@@ -353,6 +354,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.745271, 1.23096, -3.61737 )
 collision_layer = 131073
 collision_mask = 131073
 script = ExtResource( 14 )
+reset_transform_on_pickup = false
 
 [node name="testtube" type="MeshInstance" parent="TestTube"]
 mesh = ExtResource( 20 )
@@ -366,10 +368,12 @@ shape = SubResource( 38 )
 
 [node name="PressureCan" parent="." instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51148, 1.0522, -3.35882 )
+reset_transform_on_pickup = false
 picked_up_layer = 0
 
 [node name="TesTubeHolder" parent="." instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.637844, 1.17518, -3.6167 )
+reset_transform_on_pickup = false
 picked_up_layer = 0
 
 [node name="CopperPlate" type="RigidBody" parent="."]
@@ -377,6 +381,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.736665, 1.07869, -3.54454 )
 collision_layer = 131073
 collision_mask = 131073
 script = ExtResource( 14 )
+reset_transform_on_pickup = false
 
 [node name="Copper" type="MeshInstance" parent="CopperPlate"]
 mesh = ExtResource( 22 )
