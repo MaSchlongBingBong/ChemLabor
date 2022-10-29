@@ -320,6 +320,7 @@ collision_layer = 131073
 collision_mask = 131073
 script = ExtResource( 24 )
 reset_transform_on_pickup = false
+picked_up_layer = 1
 
 [node name="Burner" type="MeshInstance" parent="Burner"]
 mesh = ExtResource( 16 )
@@ -416,6 +417,7 @@ collision_layer = 131073
 collision_mask = 131073
 script = ExtResource( 14 )
 reset_transform_on_pickup = false
+picked_up_layer = 1
 
 [node name="Copper" type="MeshInstance" parent="CopperPlate"]
 mesh = ExtResource( 22 )
@@ -437,5 +439,6 @@ viewport_size = Vector2( 1920, 1080 )
 scene = ExtResource( 27 )
 
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
+[connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
 
 [editable path="FPController"]
