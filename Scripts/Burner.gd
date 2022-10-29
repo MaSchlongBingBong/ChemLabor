@@ -3,6 +3,27 @@ extends "res://addons/godot-xr-tools/objects/pickable.gd"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+export var localCords:bool = false
+export var drawOrder:int = 2
+export var drawPasses:int = 1
+export var transparent:bool = true
+export var unshaded:bool = true
+export var useAlbedo:bool = true
+export var blendMode:int = 1
+export var trailDivisor: int = 6
+export var emissionShape: int = 1
+export var direction: Vector3 = Vector3(0,1,0)
+export var gravity: Vector3 = Vector3(0,0,0)
+export var initVel: int = 5
+export var initVelRnd: float = 0.1
+export var angVel: float = 40.0
+export var angVelRnd: float = 1.0
+export var linAccl: float = 4
+export var linAcclRnd: float = 1
+export var angle: int = 360
+export var angleRnd: float = 1.0
+export var Pscale: float = 0.03
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,50 +41,55 @@ func spawnParticle(amount: int):
 	var colorRamp = load("res://FireMats/FireColor.tres")
 
 	# Drawing
-	draw(par, aabb, false, 2)
+	par = draw(par, aabb, false, 2)
 	# Draw passes
-	drawPasses(par, 1, true, true, true, 1, meshMat, mesh)
+	par = PdrawPasses(par, drawPasses, transparent, unshaded, useAlbedo, blendMode, meshMat, mesh)
 	# material properties
-	materialProperties(material, 6, 1, Vector3(0,1,0), Vector3(0,0,0), 5, 0.1, 40.0, 1.0, 4, 1, 360, 1.0, 0.03)
-
+	material = materialProperties(material, 6, 1, Vector3(0,1,0), Vector3(0,0,0), 5, 0.1, 40.0, 1.0, 4, 1, 360, 1.0, 0.03)
 	material.scale_curve = curve
 	material.color = Color(22,36,239,255)
 	material.color_ramp = colorRamp
 	par.process_material = material
 	par.amount = amount
-	par.restart()
+	par.scale = Vector3(1,0.25,1)
+	par.translation = Vector3(0,0.191,0)
+	add_child(par)
 
-func draw(par: Particles, pos: AABB, localCords: bool, drawOrder: int):
+
+func draw(par: Particles, pos: AABB, Cords: bool, dOrder: int):
 	par.visibility_aabb = pos
-	par.local_coords = localCords
-	par.draw_order = drawOrder
+	par.local_coords = Cords
+	par.draw_order = dOrder
+	return par
 
-func drawPasses(par: Particles, drawPasses: int, transparent: bool, unshaded: bool, useAlbedo: bool, blendMode: int, meshMat: SpatialMaterial, mesh: QuadMesh):
-	par.draw_passes = drawPasses
-	meshMat.flags_transparent = transparent
-	meshMat.flags_unshaded = unshaded
-	meshMat.vertex_color_use_as_albedo = useAlbedo
-	meshMat.params_blend_mode = blendMode
+func PdrawPasses(par: Particles, dPasses: int, Ptransparent: bool, Punshaded: bool, PuseAlbedo: bool, PblendMode: int, meshMat: SpatialMaterial, mesh: QuadMesh):
+	par.draw_passes = dPasses
+	meshMat.flags_transparent = Ptransparent
+	meshMat.flags_unshaded = Punshaded
+	meshMat.vertex_color_use_as_albedo = PuseAlbedo
+	meshMat.params_blend_mode = PblendMode
 	mesh.material = meshMat
 	par.draw_pass_1 = mesh
+	return par
 	
-func materialProperties(material: ParticlesMaterial, trailDivisor: int, emissionShape: int, direction: Vector3, gravity: Vector3, initVel: float, initVelRnd: float, angVel: float, angVelRnd: float, linAccl: float, linAcclRnd: float, angle: int, angleRnd: float, scale: float):
-	material.trail_divisor = trailDivisor
-	material.emission_shape = emissionShape
+func materialProperties(material: ParticlesMaterial, PtrailDivisor: int, PemissionShape: int, Pdirection: Vector3, Pgravity: Vector3, PinitVel: float, PinitVelRnd: float, PangVel: float, PangVelRnd: float, PlinAccl: float, PlinAcclRnd: float, Pangle: int, PangleRnd: float, P_scale: float):
+	material.trail_divisor = PtrailDivisor
+	material.emission_shape = PemissionShape
 	material.emission_sphere_radius = 0.01
-	material.direction = direction
+	material.direction = Pdirection
 	material.spread = 0.0
-	material.gravity = gravity
-	material.initial_velocity = initVel
-	material.initial_velocity_random = initVelRnd
-	material.angular_velocity = angVel
-	material.angular_velocity_random = angVelRnd
-	material.linear_accel = linAccl
-	material.linear_accel_random = linAcclRnd
-	material.angle = angle
-	material.angle_random = angleRnd 
-	material.scale = scale
-	material.scale_random = scale
+	material.gravity = Pgravity
+	material.initial_velocity = PinitVel
+	material.initial_velocity_random = PinitVelRnd
+	material.angular_velocity = PangVel
+	material.angular_velocity_random = PangVelRnd
+	material.linear_accel = PlinAccl
+	material.linear_accel_random = PlinAcclRnd
+	material.angle = Pangle
+	material.angle_random = PangleRnd 
+	material.scale = P_scale
+	material.scale_random = P_scale
+	return material
 
 
 
