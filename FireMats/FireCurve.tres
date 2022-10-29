@@ -1,4 +1,7 @@
-[gd_resource type="CurveTexture" format=2]
+[gd_resource type="CurveTexture" load_steps=2 format=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.00990099, 0.5125 ), 0.0, 0.0, 0, 0, Vector2( 0.465347, 0.667045 ), 0.0, 0.0, 0, 0, Vector2( 0.975248, 0.221591 ), 0.0, 0.0, 0, 0 ]
 
 [resource]
-curve = null
+curve = SubResource( 1 )
