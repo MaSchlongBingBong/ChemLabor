@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Modells/Copper.obj" type="ArrayMesh" id=22]
 [ext_resource path="res://Materials/Copper.material" type="Material" id=23]
 [ext_resource path="res://Scripts/Burner.gd" type="Script" id=24]
+[ext_resource path="res://Scripts/CopperPlate.gd" type="Script" id=25]
 [ext_resource path="res://Scripts/Sequenzing.gd" type="Script" id=26]
 [ext_resource path="res://Scene/TableUI.tscn" type="PackedScene" id=27]
 [ext_resource path="res://addons/godot-xr-tools/functions/function_pointer.tscn" type="PackedScene" id=28]
@@ -417,25 +418,20 @@ reset_transform_on_pickup = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.736665, 1.25617, -3.54454 )
 collision_layer = 131073
 collision_mask = 131073
-script = ExtResource( 14 )
-reset_transform_on_pickup = false
-picked_up_layer = 1
-
-[node name="Copper" type="MeshInstance" parent="CopperPlate"]
-mesh = ExtResource( 22 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 23 )
+script = ExtResource( 25 )
 
 [node name="CollisionShape" type="CollisionShape" parent="CopperPlate"]
 shape = SubResource( 39 )
 
 [node name="PickupCenter" type="Spatial" parent="CopperPlate"]
 
+[node name="Copper" type="MeshInstance" parent="CopperPlate"]
+mesh = ExtResource( 22 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 23 )
+
 [node name="PressureCan" parent="." instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.366681, 1.14087, -3.41307 )
-collision_layer = 131073
-collision_mask = 131073
 
 [node name="Viewport2Din3D" parent="." instance=ExtResource( 29 )]
 transform = Transform( -2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -1.1193, 1.71681, -3.33355 )

@@ -112,6 +112,8 @@ func _onContact(body:Node):
 	if body.name == "CopperPlate":
 		fire.queue_free()
 		fire = spawnParticle(200, Color("16ef1b"))
+		body.changeColor(load("res://Materials/Copperoxid.material"))
+
 	
 func _onExit(body:Node):
 	if fire != null:
