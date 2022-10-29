@@ -111,6 +111,8 @@ func nextDrawStep(delta):
 			generate_molecule()
 
 func _process(delta):
+	print(self.scale)
+	self.get_pat
 	nextDrawStep(delta)
 	nextAnimStep(delta)
 	
