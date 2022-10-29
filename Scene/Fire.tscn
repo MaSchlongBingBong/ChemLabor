@@ -1,17 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.0361446, 0.148594, 0.313253, 1 )
-colors = PoolColorArray( 0.0745098, 0.105882, 0.94902, 1, 0.890196, 0.937255, 0.0431373, 1, 0, 0, 0, 1, 0.0272763, 0.0273438, 0.026062, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0.00990099, 0.5125 ), 0.0, 0.0, 0, 0, Vector2( 0.465347, 0.667045 ), 0.0, 0.0, 0, 0, Vector2( 0.975248, 0.221591 ), 0.0, 0.0, 0, 0 ]
+[ext_resource path="res://FireMats/FireCurve.tres" type="Curve" id=1]
+[ext_resource path="res://FireMats/FireColor.tres" type="Texture" id=2]
 
 [sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
+curve = ExtResource( 1 )
 
 [sub_resource type="ParticlesMaterial" id=5]
 trail_divisor = 6
@@ -32,7 +25,7 @@ scale = 0.03
 scale_random = 0.03
 scale_curve = SubResource( 4 )
 color = Color( 0.0862745, 0.141176, 0.937255, 1 )
-color_ramp = SubResource( 2 )
+color_ramp = ExtResource( 2 )
 anim_speed = 1.0
 anim_offset = 1.0
 anim_offset_random = 1.0
