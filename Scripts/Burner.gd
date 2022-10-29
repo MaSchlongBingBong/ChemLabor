@@ -48,7 +48,7 @@ func spawnParticle(amount: int):
 	par = PdrawPasses(par, drawPasses, transparent, unshaded, useAlbedo, blendMode, meshMat, mesh)
 	# material properties
 	material = materialProperties(material, trailDivisor, emissionShape, direction, gravity, initVel, initVelRnd, angVel, angVelRnd, linAccl, linAcclRnd, angle, angleRnd, Pscale)
-	material.scale_curve = curve
+	material.scale_curve = curve as CurveTexture
 	print(material.scale_curve)
 	material.color = Pcolor
 	material.color_ramp = colorRamp
