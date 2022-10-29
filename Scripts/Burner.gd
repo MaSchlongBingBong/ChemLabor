@@ -31,7 +31,8 @@ export var life_Time:float = 0.13
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	spawnParticle(200)# Replace with function body.
+	pass
+	# Replace with function body.
 
 func spawnParticle(amount: int):
 	# particle properties
@@ -48,7 +49,7 @@ func spawnParticle(amount: int):
 	par = PdrawPasses(par, drawPasses, transparent, unshaded, useAlbedo, blendMode, meshMat, mesh)
 	# material properties
 	material = materialProperties(material, trailDivisor, emissionShape, direction, gravity, initVel, initVelRnd, angVel, angVelRnd, linAccl, linAcclRnd, angle, angleRnd, Pscale)
-	material.scale_curve = curve as CurveTexture
+	material.scale_curve = curve
 	print(material.scale_curve)
 	material.color = Pcolor
 	material.color_ramp = colorRamp
@@ -99,6 +100,8 @@ func materialProperties(material: ParticlesMaterial, PtrailDivisor: int, Pemissi
 	material.scale_random = P_scale
 	return material
 
+func action():
+	spawnParticle(200)
 
 
 
