@@ -143,6 +143,10 @@ func _process(delta):
 	else:
 		# Average velocity of this pickup
 		_velocity_averager.add_transform(delta, global_transform)
+		
+	if !is_instance_valid(picked_up_object):
+		picked_up_object = null
+		emit_signal("has_dropped")
 
 	_update_closest_object()
 

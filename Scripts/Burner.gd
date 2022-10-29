@@ -51,8 +51,7 @@ func spawnParticle(amount: int):
 	material.color_ramp = colorRamp
 	par.process_material = material
 	par.amount = amount
-	par.scale = Vector3(1,0.25,1)
-	par.translation = Vector3(0,0.191,0)
+	par.restart()
 	add_child(par)
 
 
