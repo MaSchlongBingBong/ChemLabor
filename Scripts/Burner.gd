@@ -29,12 +29,13 @@ export var life_Time:float = 0.13
 
 var fire
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 	# Replace with function body.
 
-func spawnParticle(amount: int):
+func spawnParticle(amount: int, color: Color):
 	# particle properties
 	var par = Particles.new()
 	var mesh = QuadMesh.new()
@@ -51,7 +52,7 @@ func spawnParticle(amount: int):
 	material = materialProperties(material, trailDivisor, emissionShape, direction, gravity, initVel, initVelRnd, angVel, angVelRnd, linAccl, linAcclRnd, angle, angleRnd, Pscale)
 	material.scale_curve = curve
 	print(material.scale_curve)
-	material.color = Pcolor
+	material.color = color
 	material.color_ramp = colorRamp
 	par.process_material = material
 	par.amount = amount
@@ -102,18 +103,19 @@ func materialProperties(material: ParticlesMaterial, PtrailDivisor: int, Pemissi
 
 func action():
 	if fire == null:
-		fire = spawnParticle(200)
+		fire = spawnParticle(200, Pcolor)
 	else:
 		fire.queue_free()
 		fire = null
 
+func _onContact(body:Node):
+	if body.name == "CopperPlate":
+		fire.queue_free()
+		fire = spawnParticle(200, Color("16ef1b"))
+	
+func _onExit(body:Node):
+	fire.queue_free()
+	fire = spawnParticle(200, Pcolor)
 
 
 
-
-		
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
