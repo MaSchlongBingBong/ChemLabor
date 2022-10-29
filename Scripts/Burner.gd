@@ -114,8 +114,9 @@ func _onContact(body:Node):
 		fire = spawnParticle(200, Color("16ef1b"))
 	
 func _onExit(body:Node):
-	fire.queue_free()
-	fire = spawnParticle(200, Pcolor)
+	if fire != null:
+		fire.queue_free()
+		fire = spawnParticle(200, Pcolor)
 
 
 
