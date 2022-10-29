@@ -40,12 +40,8 @@ func save_props(idx):
 	var new_node = node.duplicate(7)
 	saved_nodes[idx] = new_node
 
-func _process(delta):
-	timer += delta
-	if(timer > 5 and timer < 10):
-		for idx in range(len(sequenced_nodes)):
-			load_props(idx,false)
-		timer = 0
+func _process(_delta):
+	pass
 
 func data_changed():
 	reset_button = Global.Instance.data["reset_button"]
@@ -53,4 +49,5 @@ func data_changed():
 		reset_button.connect("pressed", self, "reset")
 
 func reset():
-	print("RESETTING")
+	for idx in range(len(sequenced_nodes)):
+		load_props(idx,false)
