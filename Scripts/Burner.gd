@@ -63,6 +63,7 @@ func spawnParticle(amount: int, color: Color):
 	par.amount = amount
 	par.restart()
 	var fire = Spatial.new()
+	print("Spawning fire !!!")
 	add_child(fire)
 	fire.add_child(par)
 	fire.translation = Vector3(0,0.191,0)
@@ -107,6 +108,7 @@ func materialProperties(material: ParticlesMaterial, PtrailDivisor: int, Pemissi
 	return material
 
 func action():
+	print("action")
 	if fire == null:
 		fire = spawnParticle(200, Pcolor)
 	else:
@@ -114,20 +116,26 @@ func action():
 		fire = null
 
 func _onContact(body:Node):
-	var copperMat = get_child_of_type(body, MeshInstance).get_active_material(0)
+	if body == self:
+		return
 	if body.name == "CopperPlate":
+		var copperMat = get_child_of_type(body, MeshInstance).get_active_material(0)
 		if copperMat == copperoxid:
 			pass
-		else:
+		elif fire:
 			fire.queue_free()
+			print("contact")
 			fire = spawnParticle(200, Color("16ef1b"))
 			yield(get_tree().create_timer(10.0), "timeout")
 			body.changeColor(copperoxid)
 
 	
 func _onExit(body:Node):
+	if body == self:
+		return
 	if fire != null:
 		fire.queue_free()
+		print("exit")
 		fire = spawnParticle(200, Pcolor)
 
 

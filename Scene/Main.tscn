@@ -207,7 +207,7 @@ points = PoolVector3Array( 0.971669, 1.10645, -0.0966641, -0.957158, -1.13088, -
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 26 )
-sequenced_nodes = [ NodePath("Cup"), NodePath(""), NodePath("Burner"), NodePath("TestTube"), NodePath("CopperPlate"), NodePath("TesTubeHolder"), NodePath("") ]
+sequenced_nodes = [ NodePath("Cup"), NodePath("Burner"), NodePath("TestTube"), NodePath("CopperPlate"), NodePath("TesTubeHolder") ]
 
 [node name="FPController" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393306, 0 )
