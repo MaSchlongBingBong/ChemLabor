@@ -28,7 +28,12 @@ export var fireScale:Vector3 = Vector3(1,0.25,1)
 export var life_Time:float = 0.13
 
 var fire
-
+var copperoxid = load("res://Materials/Copperoxid.material")
+static func get_child_of_type(node: Node, child_type):
+	for i in range(node.get_child_count()):
+		var child = node.get_child(i)
+		if child is child_type:
+			return child
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -109,10 +114,15 @@ func action():
 		fire = null
 
 func _onContact(body:Node):
+	var copperMat = get_child_of_type(body, MeshInstance).get_active_material(0)
 	if body.name == "CopperPlate":
-		fire.queue_free()
-		fire = spawnParticle(200, Color("16ef1b"))
-		body.changeColor(load("res://Materials/Copperoxid.material"))
+		if copperMat == copperoxid:
+			pass
+		else:
+			fire.queue_free()
+			fire = spawnParticle(200, Color("16ef1b"))
+			yield(get_tree().create_timer(10.0), "timeout")
+			body.changeColor(copperoxid)
 
 	
 func _onExit(body:Node):
