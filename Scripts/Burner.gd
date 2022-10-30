@@ -118,7 +118,7 @@ func action():
 func _onContact(body:Node):
 	if body == self:
 		return
-	if body.name == "CopperPlate":
+	if body.is_in_group("copperPlate"):
 		var copperMat = get_child_of_type(body, MeshInstance).get_active_material(0)
 		if copperMat == copperoxid:
 			pass

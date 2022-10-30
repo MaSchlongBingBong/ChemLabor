@@ -436,7 +436,7 @@ shape = SubResource( 38 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.637844, 1.17518, -3.6167 )
 reset_transform_on_pickup = false
 
-[node name="CopperPlate" type="RigidBody" parent="."]
+[node name="CopperPlate" type="RigidBody" parent="." groups=["copperPlate"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.73237, 1.04044, -3.54454 )
 collision_layer = 131073
 collision_mask = 131073
