@@ -21,10 +21,11 @@
             }
         },
         {
-            "node":5,
+            "node":0,
             "function": "playAudio",
             "data": {
-                "pos": 14
+                "pos": 14,
+                "duration": 5
             }
         }
     ]

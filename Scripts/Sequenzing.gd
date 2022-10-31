@@ -10,6 +10,7 @@ export(Array,NodePath) var sequenced_nodes
 var disabledNodes = {}
 
 var saved_nodes = {}
+var playing_audios = {}
 
 var timer = 0
 
@@ -57,12 +58,21 @@ func saveNode(idx, _data = {}):
 	
 
 func playAudio(idx, data):
-	var node = get_node(sequenced_nodes[idx])
-	var audio = Global.get_child_of_type(node, AudioStreamPlayer)
+	var node = get_tree().get_nodes_in_group("AudioPlayer")[0]
+	var audio = node.get_child(idx)
 	if audio:
 		audio.play(data.pos)
+		playing_audios[idx] = {pos = data.pos, duration = data.duration, node = audio}
+
+func checkAudio(idx):
+	var data = playing_audios[idx]
+	if data:
+		if data.node.get_playback_position() > data.pos + data.duration:
+			data.node.stop()
 
 func _process(delta):
+	for idx in playing_audios:
+		checkAudio(idx)
 	timer -= delta
 	if timer > 0 or step == -1:
 		#print(step)

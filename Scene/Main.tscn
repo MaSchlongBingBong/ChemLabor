@@ -239,7 +239,7 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.54890
 [node name="Pressure&Wash" parent="." instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.0013, -3.61228 )
 
-[node name="Audio" type="Spatial" parent="."]
+[node name="Audio" type="Spatial" parent="." groups=["AudioPlayer"]]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 15 )
