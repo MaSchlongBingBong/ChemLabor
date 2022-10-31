@@ -165,6 +165,7 @@ transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 [node name="Rooms" type="MeshInstance" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 30.3081, -2.0378, 6.87275 )
 mesh = ExtResource( 12 )
+material/0 = ExtResource( 23 )
 
 [node name="StaticBody" type="StaticBody" parent="Rooms"]
 
