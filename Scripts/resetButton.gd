@@ -12,6 +12,7 @@ var pressed: bool = false
 export var state: bool = false
 export var toggle: bool = false
 var button_mesh
+var effect
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,6 +20,7 @@ func _ready():
 	connect("pressed_on", self, "pressedOn")
 	connect("pressed_off", self, "pressedOff")
 	button_mesh.set_surface_material(0, SpatialMaterial.new())
+	effect = [$ButtonOn, $ButtonOff]
 	if state:
 		emit_signal("pressed_on")
 	else:
@@ -30,10 +32,13 @@ func _ready():
 #	pass
 
 func pressedOn():
+	effect[0].play()
 	button_mesh.get_active_material(0).albedo_color = Color(0,1,0,1)
 	button_mesh.get_active_material(0).emission = Color(0,1,0,1)
 
 func pressedOff():
+	if toggle:
+		effect[1].play()
 	button_mesh.get_active_material(0).albedo_color = Color(1,0,0,1)
 	button_mesh.get_active_material(0).emission = Color(1,0,0,1)
 
