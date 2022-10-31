@@ -18,8 +18,11 @@ func _ready():
 	button_mesh = $Button/CollisionShape/MeshInstance
 	connect("pressed_on", self, "pressedOn")
 	connect("pressed_off", self, "pressedOff")
+	button_mesh.set_surface_material(0, SpatialMaterial.new())
 	if state:
-		pass
+		emit_signal("pressed_on")
+	else:
+		emit_signal("pressed_off")
 		#emit_signal("pressed_on")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -308,5 +308,6 @@ transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.68263, 1.03712, -3.35
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
 [connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onPressed"]
 [connection signal="body_entered" from="Pressure&Wash/WashCanAction" to="Pressure&Wash" method="_onButtonPressed"]
+[connection signal="pressed_on" from="resetButton" to="." method="reset"]
 
 [editable path="FPController"]
