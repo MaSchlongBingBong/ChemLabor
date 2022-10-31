@@ -29,8 +29,9 @@ func _ready():
 	seq = res.seq
 
 	for node in range(len(sequenced_nodes)):
+		if sequenced_nodes[node] == null:
+			continue
 		saveNode(node)
-		pass
 	
 	Global.Instance.connect("dataChange", self, "data_changed")
 
@@ -83,4 +84,4 @@ func data_changed():
 
 func reset():
 	for idx in range(len(sequenced_nodes)):
-		loadNode(idx,{erased = false})
+		loadNode(idx,{erase = false})
