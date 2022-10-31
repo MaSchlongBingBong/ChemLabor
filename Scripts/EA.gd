@@ -25,7 +25,7 @@ func action():
 
 func loadMolecule():
 	var file = File.new()
-	if file.open("res://Scripts/test.json", File.READ) != OK:
+	if file.open("res://Scripts/bromEthanAnimation.json", File.READ) != OK:
 		return
 	var data = file.get_as_text()
 	var res = JSON.parse(data).result
