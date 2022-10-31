@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -18,7 +18,7 @@
 [ext_resource path="res://Modells/Burner.obj" type="ArrayMesh" id=16]
 [ext_resource path="res://Scene/Pressure&Wash.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Materials/glass.tres" type="Material" id=18]
-[ext_resource path="res://Scene/ResetButton.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Materials/BromideWater.tres" type="Material" id=19]
 [ext_resource path="res://Modells/testtube.obj" type="ArrayMesh" id=20]
 [ext_resource path="res://Scene/TesTubeHolder.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Modells/Copper.obj" type="ArrayMesh" id=22]
@@ -26,6 +26,7 @@
 [ext_resource path="res://Scripts/Burner.gd" type="Script" id=24]
 [ext_resource path="res://Scripts/CopperPlate.gd" type="Script" id=25]
 [ext_resource path="res://Scripts/Sequenzing.gd" type="Script" id=26]
+[ext_resource path="res://Scene/ResetButton.tscn" type="PackedScene" id=27]
 [ext_resource path="res://addons/godot-xr-tools/functions/function_pointer.tscn" type="PackedScene" id=28]
 
 [sub_resource type="BoxShape" id=7]
@@ -285,7 +286,7 @@ material/0 = ExtResource( 19 )
 
 [node name="CharlotteVO" type="AudioStreamPlayer" parent="Audio"]
 
-[node name="ResetButton" parent="." instance=ExtResource( 19 )]
+[node name="ResetButton" parent="." instance=ExtResource( 27 )]
 transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.757242, 1.03496, -3.29973 )
 
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
