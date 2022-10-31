@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Elektrophile-Addition-Favorit-20221024-125738.ogg-5b0752e2a3aa142410853894d3f113d9.oggstr"
+
+[deps]
+
+source_file="res://Sound/Elektrophile-Addition-Favorit-20221024-125738.ogg"
+dest_files=[ "res://.import/Elektrophile-Addition-Favorit-20221024-125738.ogg-5b0752e2a3aa142410853894d3f113d9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

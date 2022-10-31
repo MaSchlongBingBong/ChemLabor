@@ -56,6 +56,12 @@ func saveNode(idx, _data = {}):
 	add_child(new_node)
 	
 
+func playAudio(idx, data):
+	var node = get_node(sequenced_nodes[idx])
+	var audio = Global.get_child_of_type(node, AudioStreamPlayer)
+	if audio:
+		audio.play(data.pos)
+
 func _process(delta):
 	timer -= delta
 	if timer > 0 or step == -1:

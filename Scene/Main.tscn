@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Modells/Rooms.obj" type="ArrayMesh" id=12]
 [ext_resource path="res://Scene/Tablev2.tscn" type="PackedScene" id=13]
 [ext_resource path="res://addons/godot-xr-tools/objects/pickable.gd" type="Script" id=14]
+[ext_resource path="res://Sound/Elektrophile-Addition-Favorit-20221024-125738.ogg" type="AudioStream" id=15]
 [ext_resource path="res://Modells/Burner.obj" type="ArrayMesh" id=16]
 [ext_resource path="res://Scene/Pressure&Wash.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Materials/glass.tres" type="Material" id=18]
@@ -70,7 +71,7 @@ points = PoolVector3Array( 0.105269, 0.0119, 0.0579793, -0.101607, -0.0119, -0.0
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 26 )
-sequenced_nodes = [ NodePath("Tablev2"), NodePath("Burner"), NodePath("TestTube"), NodePath("CopperPlate"), NodePath("TesTubeHolder") ]
+sequenced_nodes = [ NodePath("Tablev2"), NodePath("Burner"), NodePath("TestTube"), NodePath("CopperPlate"), NodePath("TesTubeHolder"), NodePath("Audio") ]
 
 [node name="FPController" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393306, 0 )
@@ -237,6 +238,11 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.54890
 
 [node name="Pressure&Wash" parent="." instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.0013, -3.61228 )
+
+[node name="Audio" type="Spatial" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 15 )
 
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]

@@ -10,7 +10,7 @@
             "node": null,
             "function": "Nop",
             "data": {
-                "time":20
+                "time":5
             }
         },
         {
@@ -18,6 +18,13 @@
             "function": "loadNode",
             "data": {
                 "erase": false
+            }
+        },
+        {
+            "node":5,
+            "function": "playAudio",
+            "data": {
+                "pos": 14
             }
         }
     ]
