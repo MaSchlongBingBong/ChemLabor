@@ -10,6 +10,9 @@ export var gravity: Vector3 = Vector3(0,-4,0)
 export var accel:float = 60.0
 export var accelRnd:float= 1.0 
 export var drawPasses:int = 1
+export var Pscale:float = 0.02
+export var Escale:Vector3 = Vector3(0.001,0.001,0.001)
+
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -19,7 +22,8 @@ var ethen
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	ethen = createParticle()
+	# Replace with function body.
 
 func createParticle():
 	var par = Particles.new()
@@ -36,6 +40,14 @@ func createParticle():
 	mat.gravity = gravity
 	mat.linear_accel = accel
 	mat.linear_accel_random = accelRnd
+	mat.scale = Pscale
+	par.process_material = mat
+	var ethen = Spatial.new()
+	add_child(ethen)
+	ethen.scale = Escale
+	ethen.add_child(par)
+	return ethen
+
 
 func _onPressed(body:Node):
 	if isFlowing == false:

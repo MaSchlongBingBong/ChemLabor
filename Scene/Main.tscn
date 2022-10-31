@@ -250,7 +250,6 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.54890
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.00564, -3.61228 )
 script = ExtResource( 15 )
 reset_transform_on_pickup = true
-picked_up_layer = 0
 amount = 100
 lifetime = 8
 localcords = false
@@ -278,7 +277,6 @@ shape = SubResource( 80 )
 [node name="Audio" type="Spatial" parent="." groups=["AudioPlayer"]]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 15 )
 
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
