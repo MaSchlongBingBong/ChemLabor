@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://Scene/SettingsBoard.tscn" type="PackedScene" id=27]
 [ext_resource path="res://addons/godot-xr-tools/functions/function_pointer.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Materials/Red.material" type="Material" id=29]
+[ext_resource path="res://Materials/BromideWater.tres" type="Material" id=30]
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.5, 0.5, 0.5 )
@@ -259,11 +260,16 @@ lifetime = 1
 localcords = false
 drawOrder = 1
 emissionShape = 1
+emissionSphereRadius = 0.05
 direction = Vector3( 0, -1, 0 )
 gravity = Vector3( 0, -4, 0 )
 accel = 60.0
 accelRnd = 1.0
 drawPasses = 1
+Pscale = 0.02
+Escale = Vector3( 1, 1, 1 )
+Cscale = Vector3( 0.5, 0.5, 0.5 )
+time = 10.0
 
 [node name="PressureCanButton" type="Area" parent="Pressure&Wash"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473159, 0.213163, 0 )
@@ -281,6 +287,7 @@ shape = SubResource( 80 )
 [node name="Bromine Water" type="MeshInstance" parent="Pressure&Wash"]
 transform = Transform( 0.07, 0, 0, 0, 0.025, 0, 0, 0, 0.07, -0.00915551, 0.0209252, 0 )
 mesh = SubResource( 81 )
+material/0 = ExtResource( 30 )
 
 [node name="Button" type="MeshInstance" parent="Pressure&Wash"]
 transform = Transform( 0.989883, 0, -0.141886, 0, 1, 0, 0.141886, 0, 0.989883, -0.0390846, 0.075672, 0.172564 )
@@ -300,6 +307,5 @@ transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.68263, 1.03712, -3.35
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
 [connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onPressed"]
 [connection signal="body_entered" from="Pressure&Wash/WashCanAction" to="Pressure&Wash" method="_onButtonPressed"]
-[connection signal="pressed_on" from="resetButton" to="." method="reset"]
 
 [editable path="FPController"]
