@@ -2,14 +2,15 @@
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 1
-emission_sphere_radius = 1.0
+emission_sphere_radius = 0.05
 direction = Vector3( 0, -1, 0 )
 gravity = Vector3( 0, -4, 0 )
 linear_accel = 60.0
 linear_accel_random = 1.0
-scale = 0.03
+scale = 0.01
 
 [sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.1, 0.1, 0.1 )
 
 [node name="Spatial" type="Spatial"]
 
