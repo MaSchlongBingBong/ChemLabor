@@ -37,8 +37,11 @@ func load_props(idx, erase: bool):
 
 func save_props(idx):
 	var node = get_node(sequenced_nodes[idx])
+	saved_nodes[idx] = node
+	remove_child(node)
 	var new_node = node.duplicate(7)
-	saved_nodes[idx] = new_node
+	add_child(new_node)
+	
 
 func _process(_delta):
 	pass
