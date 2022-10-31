@@ -19,8 +19,8 @@ func _ready():
 	connect("pressed_on", self, "pressedOn")
 	connect("pressed_off", self, "pressedOff")
 	if state:
-		pressedOn()
-		emit_signal("pressed_on")
+		pass
+		#emit_signal("pressed_on")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
