@@ -22,14 +22,17 @@ export var time:float = 10
 # var b = "text"
 var isFlowing
 var ethen
+var dbe
 var counter = 0
+var texture = load("res://Materials/BromideWater.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ethen = createParticle()
+	ethen = createEthen()
 	# Replace with function body.
 
-func createParticle():
+
+func createEthen():
 	var par = Particles.new()
 	var mesh = CubeMesh.new()
 	mesh.size = Cscale
@@ -54,11 +57,14 @@ func createParticle():
 	ethen.add_child(par)
 	return ethen
 
+func createDiBromEthen():
+	pass
+
 
 func _onPressed(body:Node):
 	if isFlowing == false:
 		if body.is_in_group("Hands"):
-			ethen = createParticle()
+			ethen = createEthen()
 			isFlowing = true
 
 
@@ -66,8 +72,24 @@ func _onPressed(body:Node):
 func _process(delta):
 	counter += delta
 	if ethen != null:
-		var texture = load("res://Materials/BromideWater.tres")
 		texture.albedo_color.a = lerp(1, 0, counter/time)
 		if texture.albedo_color.a <= 0:
 			ethen.queue_free()
 			ethen = null
+			print("Ethen:Done")
+			var mesh = Global.get_children_of_type(self, MeshInstance)[1]
+			var y = mesh.scale.y
+			mesh.scale.y = lerp(mesh.scale.y, 0, (-counter/(time)))
+			mesh.translation.y = mesh.scale.y - y
+			print("Scale:Done")
+
+
+func _onButtonPressed(body:Node):
+	if body.is_in_group("Hands"):
+		dbe = createDiBromEthen()
+		var mesh = Global.get_children_of_type(self, MeshInstance)[1]
+		var y = mesh.scale.y
+		mesh.scale.y = lerp(mesh.scale.y, 0, (-counter/(time)+1))
+		mesh.translation.y = mesh.scale.y - y
+
+		
