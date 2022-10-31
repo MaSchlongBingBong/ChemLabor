@@ -18,7 +18,7 @@
 [ext_resource path="res://Modells/Burner.obj" type="ArrayMesh" id=16]
 [ext_resource path="res://Scene/Pressure&Wash.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Materials/glass.tres" type="Material" id=18]
-[ext_resource path="res://Materials/BromideWater.tres" type="Material" id=19]
+[ext_resource path="res://Scene/PhysicalButton.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Modells/testtube.obj" type="ArrayMesh" id=20]
 [ext_resource path="res://Scene/TesTubeHolder.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Modells/Copper.obj" type="ArrayMesh" id=22]
@@ -26,7 +26,7 @@
 [ext_resource path="res://Scripts/Burner.gd" type="Script" id=24]
 [ext_resource path="res://Scripts/CopperPlate.gd" type="Script" id=25]
 [ext_resource path="res://Scripts/Sequenzing.gd" type="Script" id=26]
-[ext_resource path="res://Scene/ResetButton.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scene/SettingsBoard.tscn" type="PackedScene" id=27]
 [ext_resource path="res://addons/godot-xr-tools/functions/function_pointer.tscn" type="PackedScene" id=28]
 
 [sub_resource type="BoxShape" id=7]
@@ -253,16 +253,11 @@ lifetime = 1
 localcords = false
 drawOrder = 1
 emissionShape = 1
-emissionSphereRadius = 0.05
 direction = Vector3( 0, -1, 0 )
 gravity = Vector3( 0, -4, 0 )
 accel = 60.0
 accelRnd = 1.0
 drawPasses = 1
-Pscale = 0.02
-Escale = Vector3( 1, 1, 1 )
-Cscale = Vector3( 0.5, 0.5, 0.5 )
-time = 10.0
 
 [node name="PressureCanButton" type="Area" parent="Pressure&Wash"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473159, 0.213163, 0 )
@@ -280,7 +275,6 @@ shape = SubResource( 80 )
 [node name="Bromine Water" type="MeshInstance" parent="Pressure&Wash"]
 transform = Transform( 0.07, 0, 0, 0, 0.025, 0, 0, 0, 0.07, -0.00915551, 0.0209252, 0 )
 mesh = SubResource( 81 )
-material/0 = ExtResource( 19 )
 
 [node name="Audio" type="Spatial" parent="." groups=["AudioPlayer"]]
 
@@ -289,9 +283,12 @@ material/0 = ExtResource( 19 )
 [node name="ResetButton" parent="." instance=ExtResource( 27 )]
 transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.757242, 1.03496, -3.29973 )
 
+[node name="SettingsBoard" parent="." instance=ExtResource( 27 )]
+transform = Transform( 0.5, 0, 0, 0, 0.353553, -0.353553, 0, 0.353553, 0.353553, 4.51899, 0.451582, -4.17343 )
+
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
 [connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onPressed"]
-[connection signal="reset" from="ResetButton" to="." method="reset"]
+[connection signal="pressed_on" from="ResetButton" to="." method="reset"]
 
 [editable path="FPController"]
