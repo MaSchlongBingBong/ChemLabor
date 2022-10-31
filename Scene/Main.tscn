@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -14,7 +14,7 @@
 [ext_resource path="res://Modells/Rooms.obj" type="ArrayMesh" id=12]
 [ext_resource path="res://Scene/Tablev2.tscn" type="PackedScene" id=13]
 [ext_resource path="res://addons/godot-xr-tools/objects/pickable.gd" type="Script" id=14]
-[ext_resource path="res://Sound/Elektrophile-Addition-Favorit-20221024-125738.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Scripts/Pressure&Wash.gd" type="Script" id=15]
 [ext_resource path="res://Modells/Burner.obj" type="ArrayMesh" id=16]
 [ext_resource path="res://Scene/Pressure&Wash.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Materials/glass.tres" type="Material" id=18]
@@ -69,6 +69,12 @@ points = PoolVector3Array( -0.00230222, 0.106418, -0.0167824, 0.00347531, 0.1102
 margin = 0.001
 points = PoolVector3Array( 0.105269, 0.0119, 0.0579793, -0.101607, -0.0119, -0.0555284, -0.101607, -0.0119, 0.0559694, -0.10527, 0.0119, -0.0575383, 0.101606, -0.0119, -0.0555284, -0.10527, 0.0119, 0.0579793, 0.105269, 0.0119, -0.0575383, 0.101606, -0.0119, 0.0559694 )
 
+[sub_resource type="BoxShape" id=79]
+extents = Vector3( 0.0221199, 0.0220492, 0.0111784 )
+
+[sub_resource type="BoxShape" id=80]
+extents = Vector3( 0.0154887, 0.0285897, 0.0345882 )
+
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 26 )
 sequenced_nodes = [ NodePath("Tablev2"), NodePath("Burner"), NodePath("TestTube"), NodePath("CopperPlate"), NodePath("TesTubeHolder") ]
@@ -80,6 +86,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393306, 0 )
 current = true
 far = 1000.0
 
+[node name="LeftHandController" parent="FPController" index="2" groups=["Hands"]]
+
 [node name="FunctionTeleport" parent="FPController/LeftHandController" index="0" instance=ExtResource( 5 )]
 camera = NodePath("../../ARVRCamera")
 teleport_button = 14
@@ -89,6 +97,8 @@ teleport_button = 14
 [node name="LeftPhysicsHand" parent="FPController/LeftHandController" index="2" instance=ExtResource( 10 )]
 collision_layer = 131072
 margin = 0.004
+
+[node name="RightHandController" parent="FPController" index="3" groups=["Hands"]]
 
 [node name="MovementDirect" parent="FPController/RightHandController" index="0" instance=ExtResource( 2 )]
 enabled = true
@@ -237,7 +247,33 @@ scene = ExtResource( 27 )
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.548906, 0.481629, -3.72051 )
 
 [node name="Pressure&Wash" parent="." instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.0013, -3.61228 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.00564, -3.61228 )
+script = ExtResource( 15 )
+reset_transform_on_pickup = true
+picked_up_layer = 0
+amount = 100
+lifetime = 8
+localcords = false
+drawOrder = 1
+emissionShape = 1
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, -4, 0 )
+accel = 60.0
+accelRnd = 1.0
+drawPasses = 1
+
+[node name="PressureCanButton" type="Area" parent="Pressure&Wash"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473159, 0.213163, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Pressure&Wash/PressureCanButton"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.251847, 0.143252, 0.0349605 )
+shape = SubResource( 79 )
+
+[node name="WashCanAction" type="Area" parent="Pressure&Wash"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Pressure&Wash/WashCanAction"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0384014, 0.0710218, 0.167613 )
+shape = SubResource( 80 )
 
 [node name="Audio" type="Spatial" parent="." groups=["AudioPlayer"]]
 
@@ -246,5 +282,6 @@ stream = ExtResource( 15 )
 
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
+[connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onPressed"]
 
 [editable path="FPController"]
