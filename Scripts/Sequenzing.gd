@@ -15,14 +15,26 @@ var timer = 0
 
 var reset_button
 
+var seq = []
+var step = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in range(len(sequenced_nodes)):
-		save_props(i)
+	var file = File.new()
+	if file.open("res://Scripts/sequence.json", File.READ) != OK:
+		return
+	var data = file.get_as_text()
+	var res = JSON.parse(data).result
+	print(res["name"])
+	seq = res.seq
+
+	for node in range(len(sequenced_nodes)):
+		saveNode(node)
+		pass
 	
 	Global.Instance.connect("dataChange", self, "data_changed")
 
-func load_props(idx, erase: bool):
+func loadNode(idx, data):
 	var saved = saved_nodes[idx]
 	if saved == null:
 		return
@@ -30,12 +42,12 @@ func load_props(idx, erase: bool):
 	current.queue_free()
 	add_child(saved)
 	sequenced_nodes[idx] = saved.get_path()
-	if erase:
+	if data.erase:
 		saved_nodes.erase(idx)
 	else:
 		saved_nodes[idx] = saved.duplicate(7)
 
-func save_props(idx):
+func saveNode(idx, _data = {}):
 	var node = get_node(sequenced_nodes[idx])
 	saved_nodes[idx] = node
 	remove_child(node)
@@ -43,8 +55,26 @@ func save_props(idx):
 	add_child(new_node)
 	
 
-func _process(_delta):
-	pass
+func _process(delta):
+	timer -= delta
+	if timer > 0 or step == -1:
+		#print(step)
+		return
+
+	var current = seq[step]
+	print("current step("+str(step)+") : " + str(current))
+	var node = current.node
+	if node == null:
+		timer = current.data.time
+	else:
+		if has_method(current.function):
+			call_deferred(current.function, current.node, current.data)
+		else:
+			printerr("function " + current.function + " not found")
+	
+	step += 1
+	if step >= len(seq):
+		step = -1
 
 func data_changed():
 	reset_button = Global.Instance.data["reset_button"]
@@ -53,4 +83,4 @@ func data_changed():
 
 func reset():
 	for idx in range(len(sequenced_nodes)):
-		load_props(idx,false)
+		loadNode(idx,false)
