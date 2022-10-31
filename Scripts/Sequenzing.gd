@@ -83,4 +83,4 @@ func data_changed():
 
 func reset():
 	for idx in range(len(sequenced_nodes)):
-		loadNode(idx,false)
+		loadNode(idx,{erased = false})
