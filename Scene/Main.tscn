@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -18,7 +18,7 @@
 [ext_resource path="res://Modells/Burner.obj" type="ArrayMesh" id=16]
 [ext_resource path="res://Scene/Pressure&Wash.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Materials/glass.tres" type="Material" id=18]
-[ext_resource path="res://Materials/BromideWater.tres" type="Material" id=19]
+[ext_resource path="res://Scene/ResetButton.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Modells/testtube.obj" type="ArrayMesh" id=20]
 [ext_resource path="res://Scene/TesTubeHolder.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Modells/Copper.obj" type="ArrayMesh" id=22]
@@ -26,9 +26,7 @@
 [ext_resource path="res://Scripts/Burner.gd" type="Script" id=24]
 [ext_resource path="res://Scripts/CopperPlate.gd" type="Script" id=25]
 [ext_resource path="res://Scripts/Sequenzing.gd" type="Script" id=26]
-[ext_resource path="res://Scene/TableUI.tscn" type="PackedScene" id=27]
 [ext_resource path="res://addons/godot-xr-tools/functions/function_pointer.tscn" type="PackedScene" id=28]
-[ext_resource path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" type="PackedScene" id=29]
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.5, 0.5, 0.5 )
@@ -242,11 +240,6 @@ mesh = ExtResource( 22 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 23 )
 
-[node name="Viewport2Din3D" parent="." instance=ExtResource( 29 )]
-transform = Transform( -2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -1.1193, 1.71681, -3.33355 )
-viewport_size = Vector2( 1920, 1080 )
-scene = ExtResource( 27 )
-
 [node name="Tablev2" parent="." instance=ExtResource( 13 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.548906, 0.481629, -3.72051 )
 
@@ -290,10 +283,18 @@ material/0 = ExtResource( 19 )
 
 [node name="Audio" type="Spatial" parent="." groups=["AudioPlayer"]]
 
+<<<<<<< HEAD
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
+=======
+[node name="CharlotteVO" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="ResetButton" parent="." instance=ExtResource( 19 )]
+transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.757242, 1.03496, -3.29973 )
+>>>>>>> 4e50a94 (added physical button, added start stop pause, removed ui shit, so much omg)
 
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
 [connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onPressed"]
+[connection signal="reset" from="ResetButton" to="." method="reset"]
 
 [editable path="FPController"]

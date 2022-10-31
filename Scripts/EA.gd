@@ -12,16 +12,18 @@ var currIndex = -1
 var counter = 0
 var currTimeout = 0
 
+var paused = false
+var playing = false
+
 export(Dictionary) var atom_colors;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	loadMolecule()
 	generate_molecule()
-	playAnim()
 
 func action():
-	playAnim()
+	start_stop()
 
 func loadMolecule():
 	var file = File.new()
@@ -33,7 +35,15 @@ func loadMolecule():
 	mol = res.mol
 	steps = res.steps
 
+func start_stop():
+	if playing:
+		paused = not paused
+	else:
+		playAnim()
+	
+
 func playAnim():
+	playing = true
 	loadMolecule()
 	generate_molecule()
 	currIndex = 0
@@ -73,6 +83,7 @@ func nextAnimStep(delta):
 	currIndex += 1;
 	print(currIndex);
 	if currIndex >= len(steps):
+		playing = false
 		currIndex = -1;
 
 
@@ -111,8 +122,9 @@ func nextDrawStep(delta):
 			generate_molecule()
 
 func _process(delta):
-	nextDrawStep(delta)
-	nextAnimStep(delta)
+	if not paused:
+		nextDrawStep(delta)
+		nextAnimStep(delta)
 	
 
 # Note: passing a value for the type parameter causes a crash

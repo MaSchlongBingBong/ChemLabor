@@ -33,14 +33,15 @@ func _ready():
 		if sequenced_nodes[node] == null:
 			continue
 		saveNode(node)
-	
-	Global.Instance.connect("dataChange", self, "data_changed")
 
 func loadNode(idx, data):
 	var saved = saved_nodes[idx]
 	if saved == null:
 		return
 	var current = get_node(sequenced_nodes[idx])
+	if current == null:
+		print(sequenced_nodes[idx])
+		return
 	current.queue_free()
 	add_child(saved)
 	sequenced_nodes[idx] = saved.get_path()
@@ -55,6 +56,7 @@ func saveNode(idx, _data = {}):
 	remove_child(node)
 	var new_node = node.duplicate(7)
 	add_child(new_node)
+	sequenced_nodes[idx] = new_node.get_path()
 	
 
 func playAudio(idx, data):
@@ -92,11 +94,6 @@ func _process(delta):
 	step += 1
 	if step >= len(seq):
 		step = -1
-
-func data_changed():
-	reset_button = Global.Instance.data["reset_button"]
-	if !reset_button.is_connected("pressed", self, "reset"):
-		reset_button.connect("pressed", self, "reset")
 
 func reset():
 	for idx in range(len(sequenced_nodes)):
