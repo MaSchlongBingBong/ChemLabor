@@ -2,8 +2,13 @@
 
 [resource]
 flags_transparent = true
-albedo_color = Color( 1, 1, 1, 0.219608 )
+albedo_color = Color( 1, 1, 1, 0.180392 )
 metallic_specular = 0.65
-roughness = 0.0
+roughness = 0.01
+rim_enabled = true
+rim = 1.0
+rim_tint = 0.5
 transmission_enabled = true
 transmission = Color( 0, 0, 0, 1 )
+proximity_fade_enable = true
+proximity_fade_distance = 1.0

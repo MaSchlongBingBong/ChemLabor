@@ -253,7 +253,7 @@ material/0 = ExtResource( 23 )
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.548906, 0.481629, -3.72051 )
 
 [node name="Pressure&Wash" parent="." instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.00564, -3.61228 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.07017, -3.61228 )
 script = ExtResource( 15 )
 reset_transform_on_pickup = true
 amount = 100
@@ -286,7 +286,7 @@ transform = Transform( 0.989883, 0, -0.141886, 0, 1, 0, 0.141886, 0, 0.989883, -
 shape = SubResource( 80 )
 
 [node name="Bromine Water" type="MeshInstance" parent="Pressure&Wash"]
-transform = Transform( 0.07, 0, 0, 0, 0.025, 0, 0, 0, 0.07, -0.00915551, 0.0209252, 0 )
+transform = Transform( 0.07, 0, 0, 0, 0.025, 0, 0, 0, 0.07, -0.009, 0.021199, 0 )
 mesh = SubResource( 81 )
 material/0 = ExtResource( 30 )
 

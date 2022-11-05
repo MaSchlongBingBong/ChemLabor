@@ -73,23 +73,24 @@ func _process(delta):
 	counter += delta
 	if ethen != null:
 		texture.albedo_color.a = lerp(1, 0, counter/time)
-		if texture.albedo_color.a <= 0:
+		if texture.albedo_color.a <= 0.5:
 			ethen.queue_free()
 			ethen = null
 			print("Ethen:Done")
-			var mesh = Global.get_children_of_type(self, MeshInstance)[1]
-			var y = mesh.scale.y
-			mesh.scale.y = lerp(mesh.scale.y, 0, (-counter/(time)))
-			mesh.translation.y = mesh.scale.y - y
-			print("Scale:Done")
+
 
 
 func _onButtonPressed(body:Node):
 	if body.is_in_group("Hands"):
 		dbe = createDiBromEthen()
 		var mesh = Global.get_children_of_type(self, MeshInstance)[1]
-		var y = mesh.scale.y
-		mesh.scale.y = lerp(mesh.scale.y, 0, (-counter/(time)+1))
-		mesh.translation.y = mesh.scale.y - y
-
+		var yStart = 0.025
+		var yEnd = 0.006
+		var Yscale = lerp(yStart, yEnd, counter/time)
+		if mesh.scale.y > 0.006:
+			mesh.scale.y = Yscale
+			print("Deleting Particle")
+			dbe = null
+			print(mesh.scale.y)
+			print("Scale:Done")
 		
