@@ -43,7 +43,7 @@ func _ready():
 func spawnParticle(amount: int, color: Color):
 	# particle properties
 	var par = Particles.new()
-	var mesh = QuadMesh.new()
+	var mesh = CubeMesh.new()
 	var meshMat = SpatialMaterial.new()
 	var material = ParticlesMaterial.new()
 	var aabb = AABB(Vector3(-4,-4,-4), Vector3(8,8,8))
