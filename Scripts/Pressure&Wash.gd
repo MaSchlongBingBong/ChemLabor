@@ -14,8 +14,8 @@ export var drawPasses:int = 1
 export var Pscale:float = 0.02
 export var Escale:Vector3 = Vector3(1,1,1)
 export var Cscale:Vector3 = Vector3(0.5,0.5,0.5)
-
 export var time:float = 10 
+
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -25,10 +25,10 @@ var ethen
 var dbe
 var counter = 0
 var texture = load("res://Materials/BromideWater.tres")
-
+var scaleTexture = load("res://Materials/DibromEthen.res")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ethen = createEthen()
+	pass
 	# Replace with function body.
 
 
@@ -51,14 +51,30 @@ func createEthen():
 	mat.linear_accel_random = accelRnd
 	mat.scale = Pscale
 	par.process_material = mat
-	var ethen = Spatial.new()
-	add_child(ethen)
-	ethen.scale = Escale
-	ethen.add_child(par)
-	return ethen
+	var Ethen = Spatial.new()
+	add_child(Ethen)
+	Ethen.scale = Escale
+	Ethen.add_child(par)
+	return Ethen
 
 func createDiBromEthen():
-	pass
+	var par = Particles.new()
+	var mesh = CubeMesh.new()
+	var mat = ParticlesMaterial.new()
+	par.amount = 20
+	par.draw_passes = drawPasses
+	par.draw_pass_1 = mesh
+	mat.linear_accel = 100
+	mat.scale_curve = scaleTexture
+	par.process_material = mat
+	var Dbe = Spatial.new()
+	add_child(dbe)
+	dbe.add_child(par)
+	return Dbe
+
+
+
+
 
 
 func _onPressed(body:Node):
@@ -82,14 +98,15 @@ func _process(delta):
 
 func _onButtonPressed(body:Node):
 	if body.is_in_group("Hands"):
-		dbe = createDiBromEthen()
-		var mesh = Global.get_children_of_type(self, MeshInstance)[1]
-		var yStart = 0.025
-		var yEnd = 0.006
-		var Yscale = lerp(yStart, yEnd, counter/time)
-		if mesh.scale.y > 0.006:
-			mesh.scale.y = Yscale
-			print("Deleting Particle")
+		if dbe != null:
+			dbe = createDiBromEthen()
+			var mesh = Global.get_children_of_type(self, MeshInstance)[1]
+			var yStart = 0.025
+			var yEnd = 0.006
+			var Yscale = lerp(yStart, yEnd, counter/time)
+			if mesh.scale.y > 0.006:
+				mesh.scale.y = Yscale
+			dbe.queue_free()
 			dbe = null
 			print(mesh.scale.y)
 			print("Scale:Done")
