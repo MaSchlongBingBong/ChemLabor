@@ -28,7 +28,7 @@ var texture = load("res://Materials/BromideWater.tres")
 var scaleTexture = load("res://Materials/DibromEthen.res")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	ethen = createEthen()
 	# Replace with function body.
 
 
@@ -62,20 +62,20 @@ func createDiBromEthen():
 	var mesh = CubeMesh.new()
 	var mat = ParticlesMaterial.new()
 	par.amount = 20
+	par.lifetime = 0.75
 	par.draw_passes = drawPasses
 	par.draw_pass_1 = mesh
 	mat.linear_accel = 100
 	mat.scale_curve = scaleTexture
 	par.process_material = mat
+	par.scale = Vector3(0.01, 0.01, 0.01)
 	var Dbe = Spatial.new()
-	add_child(dbe)
-	dbe.add_child(par)
+	Dbe.name = "Dibromethen"
+	Dbe.scale = Vector3(0.6, 0.16, 0.6)
+	Dbe.translation = Vector3(-0.04, 0.05, 0.171)
+	add_child(Dbe)
+	Dbe.add_child(par)
 	return Dbe
-
-
-
-
-
 
 func _onPressed(body:Node):
 	if isFlowing == false:
@@ -83,31 +83,26 @@ func _onPressed(body:Node):
 			ethen = createEthen()
 			isFlowing = true
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	counter += delta
 	if ethen != null:
 		texture.albedo_color.a = lerp(1, 0, counter/time)
-		if texture.albedo_color.a <= 0.5:
+		if texture.albedo_color.a <= 0.25:
 			ethen.queue_free()
 			ethen = null
 			print("Ethen:Done")
-
-
+	if dbe != null:
+		var mesh = Global.get_children_of_type(self, MeshInstance)[1]
+		var yStart = 0.025
+		var yEnd = 0.006
+		mesh = Global.lerpLiquid(mesh, yStart, yEnd, counter/time)
+		dbe.queue_free()
+		dbe = null
+		print(mesh.scale.y)
+		print("Scale:Done")
 
 func _onButtonPressed(body:Node):
 	if body.is_in_group("Hands"):
-		if dbe != null:
+		if ethen == null && isFlowing:
 			dbe = createDiBromEthen()
-			var mesh = Global.get_children_of_type(self, MeshInstance)[1]
-			var yStart = 0.025
-			var yEnd = 0.006
-			var Yscale = lerp(yStart, yEnd, counter/time)
-			if mesh.scale.y > 0.006:
-				mesh.scale.y = Yscale
-			dbe.queue_free()
-			dbe = null
-			print(mesh.scale.y)
-			print("Scale:Done")
-		

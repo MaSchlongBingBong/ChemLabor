@@ -1,6 +1,5 @@
 extends Node
 
-
 var Instance
 
 var old_data = {}
@@ -31,8 +30,19 @@ static func get_children_of_type(node: Node, child_type):
 			list.append(child)
 	return list
 
+static func lerpLiquid(mesh: MeshInstance, yStart: float, yEnd:float, weight: float):
+	var Yscale = lerp(yStart, yEnd, weight)
+	if mesh.scale.y > yEnd:
+		mesh.scale.y = Yscale
+	return mesh
+
+static func loadScene(node: Node, scene:Resource):
+	var instance = scene.instance()
+	node.add_child(instance)
+	return instance
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if old_data != data:
 		emit_signal("dataChange")
 		old_data = data
+
