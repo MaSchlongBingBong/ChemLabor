@@ -1,4 +1,4 @@
-extends Spatial
+extends "res://addons/godot-xr-tools/objects/pickable.gd"
 
 
 # Declare member variables here. Examples:
@@ -50,7 +50,9 @@ func draw():
 	tex.create_from_image(img)
 	var mat = SpatialMaterial.new()
 	mat.albedo_texture = tex
-	$glas/Cylinder.get_surface_material(1).albedo_texture = tex
+	var mesh = Global.get_child_of_type(get_child(0),MeshInstance)
+	mesh.get_surface_material(1).albedo_color = Color(1,1,1,1)
+	mesh.get_surface_material(1).albedo_texture = tex
 	vport_img = vport.get_texture().get_data()
 	vport_img.flip_y()
 	vport_img.save_png("res://test.png")
