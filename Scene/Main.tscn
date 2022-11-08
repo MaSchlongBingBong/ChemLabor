@@ -161,7 +161,7 @@ sequenced_nodes = [ NodePath("Tablev2"), NodePath("Burner"), NodePath("TestTube"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393306, 0 )
 
 [node name="ARVRCamera" parent="FPController" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83843, 0.994464, -2.48971 )
+transform = Transform( 0.990046, 0, 0.140746, 0, 1, 0, -0.140746, 0, 0.990046, 1.0749, 1.01212, -1.97666 )
 current = true
 far = 1000.0
 
