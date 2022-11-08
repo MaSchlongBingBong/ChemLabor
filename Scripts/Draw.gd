@@ -24,6 +24,10 @@ func _draw():
 	var rsize = font.get_string_size(text)
 	get_parent().size = rsize
 	rect_min_size = rsize
+	var rect = Rect2()
+	rect.size = rsize
+	rect.position = Vector2.ZERO
+	draw_rect(rect,Color(0.5,0.5,0.5,1),true)
 	draw_string(font,Vector2(0,rsize.y*0.9), text, Color(1,1,1,1))
 	print("drawn")
 	emit_signal("finished_draw")
