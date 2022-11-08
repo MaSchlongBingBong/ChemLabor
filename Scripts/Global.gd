@@ -30,19 +30,11 @@ static func get_children_of_type(node: Node, child_type):
 			list.append(child)
 	return list
 
-static func lerpLiquid(mesh: MeshInstance, yStart: float, yEnd:float, weight: float):
-	var Yscale = lerp(yStart, yEnd, weight)
-	if mesh.scale.y > yEnd:
-		mesh.scale.y = Yscale
-		mesh.scale.y = mesh.scale.y - Yscale/2
-	return mesh
-
 static func scaleLiquid(mesh: MeshInstance, target:float, speed: float):
 	var start = mesh.get_meta("original_scale",-1)
 	if start == -1:
 		mesh.set_meta("original_scale",mesh.scale.y)
 		start = mesh.scale.y
-
 	var delta = (start-target) * speed
 	if mesh.scale.y > target:
 		mesh.scale.y -= delta
