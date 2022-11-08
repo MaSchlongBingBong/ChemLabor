@@ -11,14 +11,6 @@ var liquid = Global.get_children_of_type(self, MeshInstance)
 func _ready():
 	print(liquid) # Replace with function body.
 
-func fillCup(mesh: MeshInstance):
-	mesh.scale = Vector3(0.04, 0.001, 0.04)
-	var yEnd = 0.03
-	var yStart = 0.006
-	var Yscale = lerp(yStart, yEnd, counter/time)
-	if mesh.scale.y < yEnd:
-		mesh.scale.y = Yscale
-		isFilled = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	counter += delta
