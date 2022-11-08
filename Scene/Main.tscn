@@ -372,8 +372,10 @@ transform = Transform( 0.5, 0, 0, 0, 0.353553, -0.353553, 0, 0.353553, 0.353553,
 [node name="resetButton" parent="." instance=ExtResource( 19 )]
 transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.68263, 1.03712, -3.3529 )
 
-[node name="Spatial" parent="." instance=ExtResource( 31 )]
-transform = Transform( 0.227689, 0, 0, 0, 0.227689, 0, 0, 0, 0.227689, 2.88355, 1.84534, -3.87656 )
+[node name="ChemGlas" parent="." instance=ExtResource( 31 )]
+transform = Transform( -9.95263e-09, 0, 0.22769, 0, 0.227689, 0, -0.22769, 0, -9.95263e-09, 0.157, 0.979, -1.87 )
+font_size = 80
+chemical_name = "CHEMICAL"
 
 [node name="Cup" type="RigidBody" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.82199, 1.0301, -3.45782 )
