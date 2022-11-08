@@ -155,7 +155,7 @@ points = PoolVector3Array( -0.048864, 0.0526634, -0.0228859, -0.0557248, 0.06296
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 26 )
-sequenced_nodes = [ NodePath("Tablev2"), NodePath("Burner"), NodePath("TestTube"), NodePath("CopperPlate"), NodePath("TesTubeHolder") ]
+sequenced_nodes = [ NodePath("Tablev2"), NodePath("Burner"), NodePath("TestTube"), NodePath("CopperPlate"), NodePath("TesTubeHolder"), NodePath("ChemGlas") ]
 
 [node name="FPController" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393306, 0 )
@@ -324,20 +324,6 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.54890
 [node name="Pressure&Wash" parent="." instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.00745, -3.61228 )
 script = ExtResource( 15 )
-amount = 100
-lifetime = 1
-localcords = false
-drawOrder = 1
-emissionShape = 1
-emissionSphereRadius = 0.05
-direction = Vector3( 0, -1, 0 )
-gravity = Vector3( 0, -4, 0 )
-accel = 60.0
-accelRnd = 1.0
-drawPasses = 1
-Pscale = 0.02
-Escale = Vector3( 1, 1, 1 )
-Cscale = Vector3( 0.5, 0.5, 0.5 )
 time = 10.0
 
 [node name="PressureCanButton" type="Area" parent="Pressure&Wash"]

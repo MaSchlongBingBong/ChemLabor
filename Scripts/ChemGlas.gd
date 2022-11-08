@@ -10,6 +10,7 @@ var drawn = false
 var vport = Viewport.new()
 var vport_img
 var liquid: MeshInstance
+var flowing: bool = false
 
 export var font_size = 40
 export var chemical_name = "Ethen"
@@ -70,4 +71,9 @@ func _process(delta):
 	# var ds = liquid.scale.y - scale
 	# print(ds)
 	# liquid.translate(Vector3(0,ds/2 * 0.12,0))
-	Global.scaleLiquid(liquid,0.01,delta/10)
+	var downness = self.transform.basis.y.dot(Vector3.DOWN)
+	if flowing or downness > 0.1:
+		Global.scaleLiquid(liquid,0.01,delta/5 * downness)
+
+func action():
+	flowing = !flowing

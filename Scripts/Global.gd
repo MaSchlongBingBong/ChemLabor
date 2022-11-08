@@ -41,6 +41,9 @@ static func scaleLiquid(mesh: MeshInstance, target:float, speed: float):
 		mesh.translation.y -= delta/2
 	return mesh
 
+static func isPointingDown(forward: Vector3, threshold = 0.1):
+	return forward.normalized().dot(Vector3.DOWN) > threshold
+
 static func loadScene(node: Node, scene:Resource):
 	var instance = scene.instance()
 	node.add_child(instance)
