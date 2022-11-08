@@ -75,7 +75,7 @@ margin = 0.001
 points = PoolVector3Array( 0.105269, 0.0119, 0.0579793, -0.101607, -0.0119, -0.0555284, -0.101607, -0.0119, 0.0559694, -0.10527, 0.0119, -0.0575383, 0.101606, -0.0119, -0.0555284, -0.10527, 0.0119, 0.0579793, 0.105269, 0.0119, -0.0575383, 0.101606, -0.0119, 0.0559694 )
 
 [sub_resource type="BoxShape" id=79]
-extents = Vector3( 0.0221199, 0.0220492, 0.0170898 )
+extents = Vector3( 0.0309738, 0.0310331, 0.0395897 )
 
 [sub_resource type="BoxShape" id=80]
 margin = 0.001
@@ -173,9 +173,7 @@ teleport_button = 14
 
 [node name="FunctionPickup" parent="FPController/LeftHandController" index="1" instance=ExtResource( 6 )]
 
-[node name="LeftPhysicsHand" parent="FPController/LeftHandController" index="2" instance=ExtResource( 10 )]
-collision_layer = 131072
-margin = 0.004
+[node name="LeftPhysicsHand" parent="FPController/LeftHandController" index="2" groups=["Hands"] instance=ExtResource( 10 )]
 
 [node name="RightHandController" parent="FPController" index="3" groups=["Hands"]]
 
@@ -189,9 +187,10 @@ strafe = true
 
 [node name="MovementTurn" parent="FPController/RightHandController" index="2" instance=ExtResource( 8 )]
 
-[node name="RightPhysicsHand" parent="FPController/RightHandController" index="3" instance=ExtResource( 9 )]
+[node name="RightPhysicsHand" parent="FPController/RightHandController" index="3" groups=["Hands"] instance=ExtResource( 9 )]
 collision_layer = 131072
 margin = 0.004
+bone_group = "Hands"
 
 [node name="FunctionPointer" parent="FPController/RightHandController" index="4" instance=ExtResource( 28 )]
 collide_with_areas = true
@@ -328,12 +327,16 @@ time = 10.0
 
 [node name="PressureCanButton" type="Area" parent="Pressure&Wash"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473159, 0.213163, 0 )
+collision_layer = 131073
+collision_mask = 131073
 
 [node name="CollisionShape" type="CollisionShape" parent="Pressure&Wash/PressureCanButton"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.251847, 0.143252, 0.0425375 )
 shape = SubResource( 79 )
 
 [node name="WashCanAction" type="Area" parent="Pressure&Wash"]
+collision_layer = 131073
+collision_mask = 131073
 
 [node name="CollisionShape" type="CollisionShape" parent="Pressure&Wash/WashCanAction"]
 transform = Transform( 0.989883, 0, -0.141886, 0, 1, 0, 0.141886, 0, 0.989883, -0.0392822, 0.0808613, 0.172332 )
