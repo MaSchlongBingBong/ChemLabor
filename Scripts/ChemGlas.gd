@@ -37,7 +37,7 @@ func drawString(s):
 	# size = cvitem.font.get_string_size(s)
 	# vport.size = size
 	# cvitem.rect_min_size =  size
-	cvitem.set_meta("content", ("%15s" % s) + "  ")
+	cvitem.set_meta("content", s)#("%30s" % s) + "  ")
 	cvitem.set_meta("font_size", font_size)
 	cvitem.draw()
 	pass

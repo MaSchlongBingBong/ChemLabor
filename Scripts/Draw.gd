@@ -22,6 +22,9 @@ func _draw():
 	font.size = size
 	var text = get_meta("content", "404 CHEM NOT FOUND")
 	var rsize = font.get_string_size(text)
+	if rsize.x > 865:
+		printerr("TEXT TO BIG ! GO BUY LIFE AND THAN WRITE SHORTEER TEXT YOU STUPID LITTLE IDIOT")
+	rsize.x = 865
 	get_parent().size = rsize
 	rect_min_size = rsize
 	var rect = Rect2()
