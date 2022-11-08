@@ -9,6 +9,7 @@ var cvitem
 var drawn = false
 var vport = Viewport.new()
 var vport_img
+var liquid: MeshInstance
 
 export var font_size = 40
 export var chemical_name = "Ethen"
@@ -28,6 +29,7 @@ func _ready():
 	# $MeshInstance.set_surface_material(0,mat)
 	cvitem.connect("finished_draw",self,"draw")
 	drawString(chemical_name)
+	liquid = $Liquid
 
 
 func drawString(s):
@@ -59,6 +61,13 @@ func draw():
 	print("saved")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+func _process(delta):
+	# var scale = liquid.scale.y
+	# if scale < 0.01:
+	# 	return;
+	# liquid.scale.y -= .0005
+	# var ds = liquid.scale.y - scale
+	# print(ds)
+	# liquid.translate(Vector3(0,ds/2 * 0.12,0))
+	Global.scaleLiquid(liquid,0.01,delta/10)
