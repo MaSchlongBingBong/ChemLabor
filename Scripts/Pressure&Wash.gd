@@ -37,7 +37,7 @@ func _onButtonPressed(body:Node):
 	if body.is_in_group("Hands"):
 		if dbe == null:
 			dbe = Global.loadScene(self, load("res://Scene/flowingLiquid.tscn"))
-			liquid = Global.scaleLiquid(liquid,0.01, counter/5)
+			Global.scaleLiquid(liquid,0.01, counter/5)
 		else:
 			dbe.queue_free()
 

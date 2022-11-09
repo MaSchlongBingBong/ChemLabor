@@ -87,6 +87,8 @@ extents = Vector3( 0.00917314, 0.0101209, 0.00724539 )
 material = ExtResource( 29 )
 size = Vector3( 0.015, 0.01, 0.011 )
 
+[sub_resource type="CylinderMesh" id=99]
+
 [sub_resource type="ConvexPolygonShape" id=83]
 margin = 0.001
 points = PoolVector3Array( -0.0385659, 0.0595168, 0.0182935, -0.0231246, 0.0475108, 0.0371675, -0.0248432, 0.0475108, 0.0371675, -0.0371242, -0.0318, 0.0143497, -0.0385659, -0.0296763, 0.0234422, -0.0231246, -0.0296763, 0.0371675, -0.0231246, 0.0629446, 0.0320188, -0.0385659, 0.0629446, 0.0234422, -0.0227706, -0.0318, 0.0322942, -0.0368489, 0.0406463, 0.0148611, -0.03892, -0.0318, 0.0143497, -0.0248432, -0.0296763, 0.0371675, -0.0265587, 0.0629446, 0.0354513, -0.0351334, 0.0629446, 0.0200097, -0.0385659, 0.0406463, 0.0148611, -0.0231246, 0.0629446, 0.0354513 )
@@ -150,8 +152,6 @@ points = PoolVector3Array( -0.0505799, 0.0458067, 0.00799359, -0.045431, 0.06296
 [sub_resource type="ConvexPolygonShape" id=98]
 margin = 0.001
 points = PoolVector3Array( -0.048864, 0.0526634, -0.0228859, -0.0557248, 0.0629627, -0.00573121, -0.0591579, 0.0629627, -0.00573121, -0.045431, 0.0389405, -0.00573121, -0.045431, 0.0629627, -0.0211697, -0.0574407, 0.0595296, -0.0177391, -0.045431, 0.0423736, -0.0194535, -0.0471482, 0.0389405, -0.0125942, -0.045431, 0.0458067, -0.00573121, -0.048864, 0.0629627, -0.024604, -0.0574407, 0.0560965, -0.00573121, -0.045431, 0.0543823, -0.024604, -0.0471482, 0.0440901, -0.0211697, -0.0591579, 0.0629627, -0.0143104, -0.0591579, 0.0595296, -0.0125942, -0.0471482, 0.0389405, -0.00573121, -0.054009, 0.0612438, -0.00573121, -0.0522944, 0.0629627, -0.0228859, -0.048864, 0.0440901, -0.0177391, -0.0557248, 0.0578131, -0.0194535, -0.045431, 0.0629627, -0.024604, -0.048864, 0.0526634, -0.00573121 )
-
-[sub_resource type="CylinderMesh" id=99]
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 26 )
@@ -381,6 +381,10 @@ mesh = ExtResource( 32 )
 skeleton = NodePath("../../FPController/ARVRCamera")
 material/0 = ExtResource( 18 )
 
+[node name="Liquid" type="MeshInstance" parent="Cup"]
+transform = Transform( 0.043, 0, 0, 0, 0.001, 0, 0, 0, 0.043, 0.00199997, -0.0204821, -0.00399995 )
+mesh = SubResource( 99 )
+
 [node name="CollisionShape16" type="CollisionShape" parent="Cup"]
 transform = Transform( 1, 0, 0, 0, 0.663, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 83 )
@@ -447,16 +451,11 @@ shape = SubResource( 98 )
 
 [node name="PickupCenter" type="Spatial" parent="Cup"]
 
-[node name="Liquid" type="MeshInstance" parent="Cup"]
-transform = Transform( 0.043, 0, 0, 0, 0.001, 0, 0, 0, 0.043, 0.00199997, -0.0204821, -0.00399995 )
-mesh = SubResource( 99 )
-
-[node name="PickupCenter2" type="Spatial" parent="Cup"]
-
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
 [connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onPressed"]
 [connection signal="body_entered" from="Pressure&Wash/WashCanAction" to="Pressure&Wash" method="_onButtonPressed"]
 [connection signal="pressed_on" from="resetButton" to="." method="reset"]
+[connection signal="body_entered" from="Cup" to="Cup" method="_on_Cup_body_entered"]
 
 [editable path="FPController"]

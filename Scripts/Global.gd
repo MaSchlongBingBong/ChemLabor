@@ -36,10 +36,11 @@ static func scaleLiquid(mesh: MeshInstance, target:float, speed: float):
 		mesh.set_meta("original_scale",mesh.scale.y)
 		start = mesh.scale.y
 	var delta = (start-target) * speed
-	if mesh.scale.y > target:
+	if mesh.scale.y * sign(delta) > target * sign(delta):
 		mesh.scale.y -= delta
 		mesh.translation.y -= delta/2
-	return mesh
+		return true
+	return false
 
 static func isPointingDown(forward: Vector3, threshold = 0.1):
 	return forward.normalized().dot(Vector3.DOWN) > threshold
