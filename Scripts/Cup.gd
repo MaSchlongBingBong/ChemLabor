@@ -24,7 +24,7 @@ func setName(name):
 
 func fill(speed, chemName):
 	if self.chemical_name == "" or self.chemical_name == chemName:
-		Global.lerpLiquid(liquid, fullLevel, emptyLevel , speed)
+		Global.lerpLiquid(liquid, emptyLevel, fullLevel , speed)
 		empty = false
 		setName(chemName)
 
@@ -36,7 +36,7 @@ func _process(delta):
 	#$Particles.emitting = flowing
 	if flowing:
 		print(flowing)
-		empty = !Global.lerpLiquid(liquid, emptyLevel, fullLevel, delta * downness)
+		empty = !Global.lerpLiquid(liquid, fullLevel, emptyLevel, delta * downness)
 		if empty:
 			setName("")
 

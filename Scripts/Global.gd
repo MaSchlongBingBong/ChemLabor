@@ -56,8 +56,8 @@ static func scaleLiquid(mesh: MeshInstance, target: float, speed: float):
 	return false
 
 static func lerpLiquid(mesh: MeshInstance, from: float, to: float, speed: float):
-	var delta = (to-from) * speed
-	if mesh.scale.y * sign(delta) > from * sign(delta):
+	var delta = (from-to) * speed
+	if mesh.scale.y * sign(delta) > to * sign(delta):
 		mesh.scale.y -= delta
 		mesh.translation.y -= delta/2
 		return true
