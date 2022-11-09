@@ -88,7 +88,7 @@ size = Vector3( 0.015, 0.01, 0.011 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 26 )
-sequenced_nodes = [ NodePath("Tablev2"), NodePath("Burner"), NodePath("TestTube"), NodePath("CopperPlate"), NodePath("TesTubeHolder"), NodePath("TetraChlorEthen") ]
+sequenced_nodes = [ NodePath("Tablev2"), NodePath("Burner"), NodePath("TestTube"), NodePath("CopperPlate"), NodePath("TesTubeHolder"), NodePath("Tetrachlorethen"), NodePath("Cup") ]
 
 [node name="FPController" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393306, 0 )
@@ -293,15 +293,16 @@ transform = Transform( 0.5, 0, 0, 0, 0.353553, -0.353553, 0, 0.353553, 0.353553,
 [node name="resetButton" parent="." instance=ExtResource( 19 )]
 transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.68263, 1.03712, -3.3529 )
 
-[node name="TetraChlorEthen" parent="." instance=ExtResource( 31 )]
+[node name="Tetrachlorethen" parent="." instance=ExtResource( 31 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.200859, 1.10736, -3.45035 )
 reset_transform_on_pickup = false
 picked_up_layer = 1
 font_size = 80
-chemical_name = "Tetrachlorethen"
+chemical_name = "H2"
 
 [node name="Cup" parent="." instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.579944, 1.01944, -3.54151 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.374994, 1.01944, -3.4742 )
+reset_transform_on_pickup = false
 
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]

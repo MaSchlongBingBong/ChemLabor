@@ -83,4 +83,4 @@ func _process(delta):
 		var result = space_state.intersect_ray(particles.global_translation,particles.global_translation + Vector3.DOWN)
 		var collider = result["collider"]
 		if(collider.has_method("fill")):
-			collider.call("fill",delta/5 * downness)
+			collider.call("fill",delta/5 * downness, chemical_name)
