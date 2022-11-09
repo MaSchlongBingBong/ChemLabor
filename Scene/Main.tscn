@@ -372,6 +372,7 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.82199
 collision_layer = 131073
 collision_mask = 131073
 script = ExtResource( 33 )
+reset_transform_on_pickup = false
 picked_up_layer = 1
 
 [node name="cup" type="MeshInstance" parent="Cup"]
@@ -449,6 +450,8 @@ shape = SubResource( 98 )
 [node name="Liquid" type="MeshInstance" parent="Cup"]
 transform = Transform( 0.043, 0, 0, 0, 0.001, 0, 0, 0, 0.043, 0.00199997, -0.0204821, -0.00399995 )
 mesh = SubResource( 99 )
+
+[node name="PickupCenter2" type="Spatial" parent="Cup"]
 
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
