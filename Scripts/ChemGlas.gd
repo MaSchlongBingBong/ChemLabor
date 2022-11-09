@@ -11,6 +11,8 @@ var vport = Viewport.new()
 var vport_img
 var liquid: MeshInstance
 var flowing: bool = false
+var chemColor: Color
+var empty : bool = false
 
 export var font_size = 40
 export var chemical_name = "Ethen"
@@ -31,6 +33,9 @@ func _ready():
 	cvitem.connect("finished_draw",self,"draw")
 	drawString(chemical_name)
 	liquid = $Liquid
+	chemColor = Global.chemColors.get(chemical_name, Color(1,0,1,1))
+	chemColor.a = 0.8
+	liquid.get_active_material(0).albedo_color = chemColor
 
 
 func drawString(s):
@@ -64,16 +69,18 @@ func draw():
 
 
 func _process(delta):
-	# var scale = liquid.scale.y
-	# if scale < 0.01:
-	# 	return;
-	# liquid.scale.y -= .0005
-	# var ds = liquid.scale.y - scale
-	# print(ds)
-	# liquid.translate(Vector3(0,ds/2 * 0.12,0))
 	var downness = self.transform.basis.y.dot(Vector3.DOWN)
-	if flowing or downness > 0.1:
-		Global.scaleLiquid(liquid,0.01,delta/5 * downness)
-
-func action():
-	flowing = !flowing
+	flowing = downness > 0.2
+	flowing = flowing and not empty
+	$Particles.emitting = flowing
+	if flowing:
+		empty = !Global.scaleLiquid(liquid,0.01,delta/5 * downness)
+		var particles = $Particles
+		#particles.process_material.direction = self.linear_velocity*10 + Vector3.UP
+		particles.process_material.color = chemColor
+	
+		var space_state = get_world().direct_space_state
+		var result = space_state.intersect_ray(particles.global_translation,particles.global_translation + Vector3.DOWN)
+		var collider = result["collider"]
+		if(collider.has_method("fill")):
+			collider.call("fill",delta/5 * downness)

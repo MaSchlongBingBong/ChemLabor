@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/ChemGlas.gd" type="Script" id=1]
 [ext_resource path="res://Scene/chemGlass.tscn" type="PackedScene" id=2]
@@ -13,6 +13,41 @@ height = 1.0
 [sub_resource type="SpatialMaterial" id=3]
 flags_transparent = true
 albedo_color = Color( 1, 0, 0, 0.607843 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.00401606, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+trail_divisor = 6
+emission_shape = 1
+emission_sphere_radius = 0.05
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+initial_velocity = 5.0
+linear_accel = 9.81
+linear_accel_random = 0.23
+damping = 15.0
+scale_curve = SubResource( 7 )
+color = Color( 0.0313726, 0, 1, 1 )
+color_ramp = SubResource( 5 )
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+
+[sub_resource type="CubeMesh" id=10]
+material = SubResource( 9 )
+size = Vector3( 0.01, 0.01, 0.01 )
 
 [node name="ChemGlas" type="RigidBody"]
 collision_layer = 131073
@@ -32,3 +67,11 @@ shape = SubResource( 1 )
 transform = Transform( 0.05, 0, 0, 0, 0.12, 0, 0, 0, 0.05, 0, -0.021, 0 )
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.120721, 0 )
+amount = 100
+local_coords = false
+draw_order = 2
+process_material = SubResource( 8 )
+draw_pass_1 = SubResource( 10 )

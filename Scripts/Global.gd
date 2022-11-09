@@ -7,10 +7,23 @@ var data = {}
 
 signal dataChange
 
+var chemColors = {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if Instance == null:
 		Instance = self
+	var file = File.new()
+	if file.open("res://Scripts/chemColor.json", File.READ) != OK:
+		return
+	var data = file.get_as_text()
+	var res = JSON.parse(data).result
+	for k in res:
+		var v = res[k]
+		var color = Color8(v[0], v[1], v[2])
+		color.a = 0.8
+		chemColors[k] = color
+
 
 
 # Note: passing a value for the type parameter causes a crash
