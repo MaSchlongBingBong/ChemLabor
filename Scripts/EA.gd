@@ -17,6 +17,8 @@ var playing = false
 
 export(Dictionary) var atom_colors;
 
+export(PackedScene) var electronParticle;
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	loadMolecule()
@@ -70,11 +72,16 @@ func nextAnimStep(delta):
 				mol.bonds[step.data.idx].number -= 1
 			else:
 				mol.bonds.remove(step.data.idx)
+			if bond.get("showElectrons") != null:
+				bond["showElectrons"] = null
 			generate_molecule()
 		"playAudio":
 				print("playing audio once implemented lol")
 		"moveAtom":
 				moveAtom(step.data.idx, dict2vec(step.data.pos), step.duration)
+		"moveElectrons":
+				mol.bonds[step.data.idx].showElectrons = step.data.electron
+				generate_molecule()
 		_:
 			printerr("type '" + step.type + "' unknown")
 		
@@ -167,8 +174,9 @@ func generate_molecule():
 	bondObjects = [];
 	bondObjects.resize(len(mol.bonds))
 
-	for child in get_children_of_type(self,CollisionShape):
-		child.queue_free()
+	for child in get_children():
+		if child.name != "PickupCenter":
+			child.queue_free()
 	
 
 	for i in range(len(mol["atoms"])):
@@ -206,6 +214,14 @@ func generate_molecule():
 
 			bo.translate(Vector3(0,0,-dist/2));
 			bo.rotate_object_local(Vector3(1,0,0),PI/2)
+
+			if bond.get("showElectrons") != null:
+				var particle = bond.showElectrons
+				var offset = range_lerp(particle,0,1,-1,1)
+				var particle_node = electronParticle.instance()
+				add_child(particle_node)
+				var electronTrans = bo.translation + -bo.global_transform.basis.y * offset * dist
+				particle_node.translation = electronTrans
 
 			var m = SpatialMaterial.new()
 			m.albedo_color = atom_colors.get(to.name,Color("#ff00ff"))
