@@ -14,7 +14,7 @@ func _ready():
 	mat = fire.process_material
 	fire.scale.y = 0.25 
 	fire.translation.y = 0.19
-	fire.emitting = true
+	fire.emitting = false
 	# Replace with function body.
 
 func action():
