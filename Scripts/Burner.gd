@@ -34,14 +34,16 @@ func _onContact(body:Node):
 			print("contact")
 			yield(get_tree().create_timer(10.0), "timeout")
 			body.changeColor(copperoxid)
-			fire.Color = Color("#1624ef")
+			mat.color = Color("#1624ef")
 			fire.process_material = mat
 
 
 func _onExit(body:Node):
 	if body == self:
 		return
-	if fire != null:
+	if fire.emitting:
+		mat.color = Color("#1624ef")
+		fire.process_material = mat
 		print("exit")
 
 
