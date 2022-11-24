@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -33,6 +33,8 @@
 [ext_resource path="res://Scene/ChemGlas.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Scene/Cup.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Scene/Electrons_Particles.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Scripts/Tablev2.gd" type="Script" id=34]
+[ext_resource path="res://Scene/flowingLiquid.tscn" type="PackedScene" id=35]
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.5, 0.5, 0.5 )
@@ -73,6 +75,9 @@ points = PoolVector3Array( -0.00230222, 0.106418, -0.0167824, 0.00347531, 0.1102
 [sub_resource type="ConvexPolygonShape" id=39]
 margin = 0.001
 points = PoolVector3Array( 0.105269, 0.0119, 0.0579793, -0.101607, -0.0119, -0.0555284, -0.101607, -0.0119, 0.0559694, -0.10527, 0.0119, -0.0575383, 0.101606, -0.0119, -0.0555284, -0.10527, 0.0119, 0.0579793, 0.105269, 0.0119, -0.0575383, 0.101606, -0.0119, 0.0559694 )
+
+[sub_resource type="BoxShape" id=83]
+extents = Vector3( 0.0497244, 0.0410051, 0.0401871 )
 
 [sub_resource type="BoxShape" id=79]
 extents = Vector3( 0.0309738, 0.0310331, 0.0395897 )
@@ -253,6 +258,17 @@ material/0 = ExtResource( 23 )
 
 [node name="Tablev2" parent="." instance=ExtResource( 13 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.548906, 0.481629, -3.72051 )
+script = ExtResource( 34 )
+
+[node name="water" parent="Tablev2" instance=ExtResource( 35 )]
+transform = Transform( 0.013, 0, 0, 0, 0.063, 0, 0, 0, 0.013, -2.01366, 0.56485, -0.0136509 )
+
+[node name="Area" type="Area" parent="Tablev2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35412, 0.626231, -2.38419e-07 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Tablev2/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.435719, -0.13875, 0.0814082 )
+shape = SubResource( 83 )
 
 [node name="Pressure&Wash" parent="." instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.00745, -3.61228 )
@@ -309,6 +325,7 @@ reset_transform_on_pickup = false
 
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
+[connection signal="body_entered" from="Tablev2/Area" to="Tablev2" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onPressed"]
 [connection signal="body_entered" from="Pressure&Wash/WashCanAction" to="Pressure&Wash" method="_onButtonPressed"]
 [connection signal="pressed_on" from="resetButton" to="." method="reset"]
