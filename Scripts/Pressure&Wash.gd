@@ -3,14 +3,13 @@ extends "res://addons/godot-xr-tools/objects/pickable.gd"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var isFlowing = false
+var ethenFlowing = false
 var ethen
 var dbe
 var counter = 0
 var liquid
-var newA
+var newAlpha
 var dbeFlowing = false
-var scaleLiquidDone = false
 
 export var timer:int = 10
 
@@ -23,20 +22,19 @@ func _onPressed(body:Node):
 	print(body.get_groups())
 	if body.is_in_group("Hands"):
 		ethen = Global.loadScene(self, load("res://Scene/EthenParticals.tscn"))
-		while !isFlowing:
-			newA = lerp(liquid.get_surface_material(0).albedo_color.a, 0, counter)
+		while !ethenFlowing:
+			newAlpha = lerp(liquid.get_surface_material(0).albedo_color.a, 0, counter)
 			if liquid.get_surface_material(0).albedo_color.a > 0.1:
-				liquid.get_surface_material(0).albedo_color.a = newA
+				liquid.get_surface_material(0).albedo_color.a = newAlpha
 			else:
 				print("Done")
 				ethen.queue_free()
-				isFlowing = true
+				ethenFlowing = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if dbeFlowing:
-		scaleLiquidDone = Global.scaleLiquid(liquid, 0.001, delta/timer)
-		if !scaleLiquidDone:
+	if dbeFlowing:	
+		if !Global.scaleLiquid(liquid, 0.001, delta/timer):
 			dbeFlowing = false
 			dbe.queue_free();
 			
