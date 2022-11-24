@@ -318,11 +318,7 @@ transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.68263, 1.03712, -3.35
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.200859, 1.10736, -3.45035 )
 reset_transform_on_pickup = false
 picked_up_layer = 1
-volume = 200
 chemical_name = "H2"
-fullScale = 0.12
-emptyRate = 5
-fillVolume = 200
 font_size = 80
 
 [node name="Cup" parent="." instance=ExtResource( 32 )]

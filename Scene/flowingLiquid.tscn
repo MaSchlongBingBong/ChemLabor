@@ -6,7 +6,7 @@
 direction = Vector3( 0, 0, 0 )
 linear_accel = 100.0
 scale_curve = ExtResource( 1 )
-color = Color( 0.619608, 0.2, 0.2, 1 )
+color = Color( 0.945098, 0.92549, 0.92549, 1 )
 
 [sub_resource type="SpatialMaterial" id=3]
 vertex_color_use_as_albedo = true

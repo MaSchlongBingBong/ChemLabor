@@ -8,12 +8,14 @@ var dbe
 var counter = 0
 var liquid
 var newAlpha
+var mat
 
 export var timer:int = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	dbe = Global.get_child_of_type(Global.loadScene(self, load("res://Scene/flowingLiquid.tscn")) , Particles)
+	mat = dbe.process_material
 	dbe.emitting = false
 	ethen = Global.get_child_of_type(Global.loadScene(self, load("res://Scene/EthenParticals.tscn")) , Particles)
 	ethen.emitting = false
@@ -41,4 +43,5 @@ func _process(delta):
 func _onButtonPressed(body:Node):
 	if body.is_in_group("Hands"):
 		dbe.emitting = !dbe.emmiting
-		dbe.color = liquid.color
+		mat.color = liquid.color
+		dbe.process_material = mat

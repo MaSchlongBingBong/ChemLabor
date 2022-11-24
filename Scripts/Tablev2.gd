@@ -7,7 +7,7 @@ var water
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	water = Global.get_child_of_type(Global.loadScene(self, load("res://Scene/flowingLiquid.tscn")) , Particles)
+	water = Global.loadScene(self, load("res://Scene/flowingLiquid.tscn")).get_child(0)
 	water.emitting = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

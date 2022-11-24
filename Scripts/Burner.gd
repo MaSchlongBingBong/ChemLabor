@@ -6,13 +6,15 @@ extends "res://addons/godot-xr-tools/objects/pickable.gd"
 # var b = "text"
 var copperoxid = load("res://Materials/Copperoxid.material")
 var copperMat;
+var mat
 # Called when the node enters the scene tree for the first time.
 var fire
 func _ready():
 	fire = Global.loadScene(self, load("res://Scene/Fire.tscn")).get_child(0)
+	mat = fire.process_material
 	fire.scale.y = 0.25 
 	fire.translation.y = 0.19
-	fire.emitting = false
+	fire.emitting = true
 	# Replace with function body.
 
 func action():
@@ -27,11 +29,13 @@ func _onContact(body:Node):
 		if copperMat == copperoxid:
 			pass
 		elif fire:
-			fire.Color = Color("#0e7310")
+			mat.Color = Color("#0e7310")
+			fire.process_material = mat
 			print("contact")
 			yield(get_tree().create_timer(10.0), "timeout")
 			body.changeColor(copperoxid)
 			fire.Color = Color("#1624ef")
+			fire.process_material = mat
 
 
 func _onExit(body:Node):
