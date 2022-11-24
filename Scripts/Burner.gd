@@ -9,7 +9,7 @@ var copperMat;
 # Called when the node enters the scene tree for the first time.
 var fire
 func _ready():
-	fire = Global.get_child_of_type(Global.loadScene(self, load("res://Scene/Fire.tscn")), Particles)
+	fire = Global.loadScene(self, load("res://Scene/Fire.tscn")).get_child(0)
 	fire.scale.y = 0.25 
 	fire.translation.y = 0.19
 	fire.emitting = false
@@ -27,11 +27,11 @@ func _onContact(body:Node):
 		if copperMat == copperoxid:
 			pass
 		elif fire:
-			fire.color = Color("#0e7310")
+			fire.Color = Color("#0e7310")
 			print("contact")
 			yield(get_tree().create_timer(10.0), "timeout")
 			body.changeColor(copperoxid)
-			fire.color = Color("#1624ef")
+			fire.Color = Color("#1624ef")
 
 
 func _onExit(body:Node):
