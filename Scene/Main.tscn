@@ -321,6 +321,17 @@ picked_up_layer = 1
 chemical_name = "H2"
 font_size = 80
 
+[node name="Brom" parent="." instance=ExtResource( 31 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0212245, 1.10281, -3.65147 )
+reset_transform_on_pickup = false
+picked_up_layer = 1
+volume = 200
+chemical_name = "Brom"
+fullScale = 0.12
+emptyRate = 5
+fillVolume = 200
+font_size = 80
+
 [node name="Cup" parent="." instance=ExtResource( 32 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.374994, 1.0209, -3.4742 )
 script = ExtResource( 34 )

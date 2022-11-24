@@ -64,8 +64,6 @@ func calcLiquid():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if volume > 0:
-		print(chemical_name)
 	var downness = self.transform.basis.y.dot(Vector3.DOWN)
 	var shouldFlow = downness > 0.2
 	shouldFlow = shouldFlow and volume > 0

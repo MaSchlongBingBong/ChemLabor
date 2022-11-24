@@ -20,6 +20,7 @@ image = SubResource( 5 )
 size = Vector2( 1002, 80 )
 
 [sub_resource type="SpatialMaterial" id=2]
+resource_local_to_scene = true
 albedo_texture = SubResource( 4 )
 uv1_scale = Vector3( 1, 6, 1 )
 
