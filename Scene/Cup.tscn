@@ -2,7 +2,10 @@
 
 [ext_resource path="res://Scripts/Cup.gd" type="Script" id=1]
 [ext_resource path="res://Modells/Cup.obj" type="ArrayMesh" id=2]
-[ext_resource path="res://Materials/glass.tres" type="Material" id=3]
+
+[sub_resource type="SpatialMaterial" id=101]
+flags_transparent = true
+albedo_color = Color( 1, 1, 1, 0.329412 )
 
 [sub_resource type="ConvexPolygonShape" id=83]
 margin = 0.001
@@ -83,7 +86,7 @@ picked_up_layer = 1
 transform = Transform( 1, 0, 0, 0, 0.663, 0, 0, 0, 1, 0, 0, 0 )
 mesh = ExtResource( 2 )
 skeleton = NodePath("../../FPController/ARVRCamera")
-material/0 = ExtResource( 3 )
+material/0 = SubResource( 101 )
 
 [node name="CollisionShape16" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.663, 0, 0, 0, 1, 0, 0, 0 )

@@ -304,7 +304,7 @@ font_size = 80
 chemical_name = "H2"
 
 [node name="Cup" parent="." instance=ExtResource( 32 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.374994, 1.01944, -3.4742 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.374994, 1.0209, -3.4742 )
 reset_transform_on_pickup = false
 
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
