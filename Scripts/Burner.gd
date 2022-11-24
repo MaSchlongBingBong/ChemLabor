@@ -37,7 +37,7 @@ func _onContact(body:Node):
 			body.changeColor(copperoxid)
 			fire.Color = Color("#1624ef")
 
-	
+
 func _onExit(body:Node):
 	if body == self:
 		return
