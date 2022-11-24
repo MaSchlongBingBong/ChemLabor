@@ -29,7 +29,7 @@ func _onContact(body:Node):
 		if copperMat == copperoxid:
 			pass
 		elif fire:
-			mat.Color = Color("#0e7310")
+			mat.color = Color("#0e7310")
 			fire.process_material = mat
 			print("contact")
 			yield(get_tree().create_timer(10.0), "timeout")
