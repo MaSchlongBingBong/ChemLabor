@@ -17,8 +17,6 @@ export var timer:int = 10
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	liquid = Global.get_children_of_type(self, MeshInstance)[1]	
-	dbe = Global.loadScene(self, load("res://Scene/flowingLiquid.tscn"))
-	dbeFlowing = true
 	# Replace with function body.
 func _onPressed(body:Node):
 	print("help")
