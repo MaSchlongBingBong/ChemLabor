@@ -42,6 +42,6 @@ func _process(delta):
 			
 func _onButtonPressed(body:Node):
 	if body.is_in_group("Hands"):
-		dbe.emitting = !dbe.emmiting
+		dbe.emitting = !dbe.emitting
 		mat.color = liquid.color
 		dbe.process_material = mat

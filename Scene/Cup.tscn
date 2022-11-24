@@ -75,6 +75,7 @@ points = PoolVector3Array( -0.048864, 0.0526634, -0.0228859, -0.0557248, 0.06296
 height = 1.0
 
 [sub_resource type="SpatialMaterial" id=100]
+resource_local_to_scene = true
 
 [node name="Cup" type="RigidBody"]
 collision_layer = 131073
