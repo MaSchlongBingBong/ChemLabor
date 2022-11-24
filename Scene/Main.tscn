@@ -316,12 +316,25 @@ transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.68263, 1.03712, -3.35
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.200859, 1.10736, -3.45035 )
 reset_transform_on_pickup = false
 picked_up_layer = 1
-font_size = 80
+volume = 200
 chemical_name = "H2"
+fullScale = 0.12
+emptyRate = 5
+fillVolume = 200
+font_size = 80
 
 [node name="Cup" parent="." instance=ExtResource( 32 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.374994, 1.0209, -3.4742 )
 reset_transform_on_pickup = false
+volume = 0
+chemical_name = ""
+emptyScale = 0.002
+fullScale = 0.05
+emptyRate = 50
+fillVolume = 50
+
+[node name="Particles" parent="Cup" instance=ExtResource( 35 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.0412458, 0 )
 
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]

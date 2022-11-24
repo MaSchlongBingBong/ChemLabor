@@ -1,4 +1,4 @@
-extends "res://addons/godot-xr-tools/objects/pickable.gd"
+extends "res://Scripts/Liquid.gd"
 
 
 # Declare member variables here. Examples:
@@ -9,13 +9,9 @@ var cvitem
 var drawn = false
 var vport = Viewport.new()
 var vport_img
-var liquid: MeshInstance
-var flowing: bool = false
 var chemColor: Color
-var empty : bool = false
 
 export var font_size = 40
-export var chemical_name = "Ethen"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -67,20 +63,19 @@ func draw():
 	print("saved")
 
 
-
-func _process(delta):
-	var downness = self.transform.basis.y.dot(Vector3.DOWN)
-	flowing = downness > 0.2
-	flowing = flowing and not empty
-	$Particles.emitting = flowing
-	if flowing:
-		empty = !Global.scaleLiquid(liquid,0.01,delta/5 * downness)
-		var particles = $Particles
-		#particles.process_material.direction = self.linear_velocity*10 + Vector3.UP
-		particles.process_material.color = chemColor
+# func _process(delta):
+# 	var downness = self.transform.basis.y.dot(Vector3.DOWN)
+# 	flowing = downness > 0.2
+# 	flowing = flowing and not empty
+# 	$Particles.emitting = flowing
+# 	if flowing:
+# 		empty = !Global.scaleLiquid(liquid,0.01,delta/5 * downness)
+# 		var particles = $Particles
+# 		#particles.process_material.direction = self.linear_velocity*10 + Vector3.UP
+# 		particles.process_material.color = chemColor
 	
-		var space_state = get_world().direct_space_state
-		var result = space_state.intersect_ray(particles.global_translation,particles.global_translation + Vector3.DOWN)
-		var collider = result["collider"]
-		if(collider.has_method("fill")):
-			collider.call("fill",delta/5 * downness, chemical_name)
+# 		var space_state = get_world().direct_space_state
+# 		var result = space_state.intersect_ray(particles.global_translation,particles.global_translation + Vector3.DOWN)
+# 		var collider = result["collider"]
+# 		if(collider.has_method("fill")):
+# 			collider.call("fill",delta * downness * 5, chemical_name)
