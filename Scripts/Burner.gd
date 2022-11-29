@@ -53,7 +53,6 @@ func _onExit(body:Node):
 func _process(delta):
 	if fire.emitting:
 		for body in area.get_overlapping_bodies():
-			print(body)
 			if body.has_method("oxidize"):
 				body.call("oxidize", delta, copperoxid)
 

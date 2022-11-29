@@ -73,6 +73,9 @@ points = PoolVector3Array( 0.105269, 0.0119, 0.0579793, -0.101607, -0.0119, -0.0
 [sub_resource type="BoxShape" id=83]
 extents = Vector3( 0.0497244, 0.0410051, 0.0401871 )
 
+[sub_resource type="BoxShape" id=84]
+extents = Vector3( 0.0442713, 0.174683, 0.0380126 )
+
 [sub_resource type="BoxShape" id=79]
 extents = Vector3( 0.0309738, 0.0310331, 0.0395897 )
 
@@ -234,7 +237,7 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.54890
 script = ExtResource( 37 )
 
 [node name="water" parent="Tablev2" instance=ExtResource( 36 )]
-transform = Transform( 0.013, 0, 0, 0, 0.063, 0, 0, 0, 0.013, -2.01366, 0.56485, -0.0136509 )
+transform = Transform( 0.013, 0, 0, 0, 0.063, 0, 0, 0, 0.013, -2.01998, 0.56485, 0.0102909 )
 
 [node name="Area" type="Area" parent="Tablev2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35412, 0.626231, -2.38419e-07 )
@@ -242,6 +245,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35412, 0.626231, -2.38419e-
 [node name="CollisionShape" type="CollisionShape" parent="Tablev2/Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.435719, -0.13875, 0.0814082 )
 shape = SubResource( 83 )
+
+[node name="water2" type="Area" parent="Tablev2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02, 0.565, 0.01 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Tablev2/water2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00774932, -0.157874, -0.00414109 )
+shape = SubResource( 84 )
 
 [node name="Pressure&Wash" parent="." instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.00745, -3.61228 )
@@ -366,6 +376,7 @@ transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.034508, 0 )
 [connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
 [connection signal="body_entered" from="Tablev2/Area" to="Tablev2" method="_on_Area_body_entered"]
+[connection signal="body_entered" from="Tablev2/water2" to="Tablev2" method="_onFill"]
 [connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onPressed"]
 [connection signal="body_entered" from="Pressure&Wash/WashCanAction" to="Pressure&Wash" method="_onButtonPressed"]
 [connection signal="pressed_on" from="resetButton" to="." method="reset"]
