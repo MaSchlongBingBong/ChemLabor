@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -88,6 +88,9 @@ extents = Vector3( 0.0165323, 0.0153477, 0.0158653 )
 [sub_resource type="CubeMesh" id=82]
 material = ExtResource( 29 )
 size = Vector3( 0.015, 0.01, 0.011 )
+
+[sub_resource type="BoxShape" id=85]
+extents = Vector3( 0.0217228, 0.0337746, 0.0144433 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 26 )
@@ -217,7 +220,6 @@ shape = SubResource( 78 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92299, 1.40623, -3.47053 )
 collision_layer = 131073
 collision_mask = 131073
-gravity_scale = 0.0
 script = ExtResource( 25 )
 reset_transform_on_pickup = false
 picked_up_layer = 1
@@ -250,12 +252,13 @@ shape = SubResource( 83 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02, 0.565, 0.01 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Tablev2/water2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00774932, -0.157874, -0.00414109 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00734115, -0.155909, -0.00214219 )
 shape = SubResource( 84 )
 
 [node name="Pressure&Wash" parent="." instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.00745, -3.61228 )
-script = null
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858611, 1.00628, -3.61228 )
+reset_transform_on_pickup = true
+picked_up_layer = 0
 
 [node name="PressureCanButton" type="Area" parent="Pressure&Wash"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473159, 0.213163, 0 )
@@ -283,6 +286,12 @@ material/0 = ExtResource( 30 )
 [node name="Button" type="MeshInstance" parent="Pressure&Wash"]
 transform = Transform( 0.989883, 0, -0.141886, 0, 1, 0, 0.141886, 0, 0.989883, -0.0390846, 0.075672, 0.172564 )
 mesh = SubResource( 82 )
+
+[node name="Liquid" type="Area" parent="Pressure&Wash"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Pressure&Wash/Liquid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0401552, 0.024152, 0.16079 )
+shape = SubResource( 85 )
 
 [node name="Audio" type="Spatial" parent="." groups=["AudioPlayer"]]
 
@@ -377,8 +386,8 @@ transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.034508, 0 )
 [connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
 [connection signal="body_entered" from="Tablev2/Area" to="Tablev2" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Tablev2/water2" to="Tablev2" method="_onFill"]
-[connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onPressed"]
-[connection signal="body_entered" from="Pressure&Wash/WashCanAction" to="Pressure&Wash" method="_onButtonPressed"]
+[connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onEthenPressed"]
+[connection signal="body_entered" from="Pressure&Wash/WashCanAction" to="Pressure&Wash" method="_onDbePressed"]
 [connection signal="pressed_on" from="resetButton" to="." method="reset"]
 [connection signal="body_entered" from="Cup" to="Cup" method="_on_Cup_body_entered"]
 [connection signal="body_entered" from="Cup2" to="Cup2" method="_on_Cup_body_entered"]
