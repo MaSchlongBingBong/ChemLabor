@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-xr-tools/functions/movement_direct.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Scripts/EA.gd" type="Script" id=11]
 [ext_resource path="res://Modells/Rooms.obj" type="ArrayMesh" id=12]
 [ext_resource path="res://Scene/Tablev2.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Sound/Elektrophile-Addition-Favorit-20221024-125738.ogg" type="AudioStream" id=14]
 [ext_resource path="res://Modells/Burner.obj" type="ArrayMesh" id=16]
 [ext_resource path="res://Scene/Pressure&Wash.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scene/PhysicalButton.tscn" type="PackedScene" id=19]
@@ -276,6 +277,7 @@ mesh = SubResource( 82 )
 [node name="Audio" type="Spatial" parent="." groups=["AudioPlayer"]]
 
 [node name="CharlotteVO" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 14 )
 
 [node name="SettingsBoard" parent="." instance=ExtResource( 27 )]
 transform = Transform( 0.5, 0, 0, 0, 0.353553, -0.353553, 0, 0.353553, 0.353553, 4.51899, 0.451582, -4.17343 )
