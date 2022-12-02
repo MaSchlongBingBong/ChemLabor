@@ -16,6 +16,7 @@ var timer = 10
 func _ready():
 	area = Global.get_child_of_type(self, Area)
 	fire = Global.loadScene(self, load("res://Scene/Fire.tscn")).get_child(0)
+	fire.emitting = false
 	mat = fire.process_material
 	fire.scale.y = 0.25 
 	fire.translation.y = 0.19
@@ -40,8 +41,6 @@ func _onContact(body:Node):
 			mat.color = Color("#1624ef")
 			fire.process_material = mat
 
-
-
 func _onExit(body:Node):
 	if body == self:
 		return
@@ -53,6 +52,6 @@ func _onExit(body:Node):
 func _process(delta):
 	if fire.emitting:
 		for body in area.get_overlapping_bodies():
-			if body.has_method("oxidize"):
+			if body.has_method("oxidize") and body.get_meta("chemical") == "Dibromethan":
 				body.call("oxidize", delta, copperoxid)
 

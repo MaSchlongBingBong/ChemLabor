@@ -4,17 +4,23 @@ extends "res://addons/godot-xr-tools/objects/pickable.gd"
 # var a = 2
 # var b = "text"
 var timer = 10
+var mesh
+var area 
+var chemName
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	mesh = Global.get_child_of_type(self,MeshInstance)
+	area = Global.get_child_of_type(self, Area)
 
 func changeColor(copperoxid):
-	var mesh = Global.get_child_of_type(self,MeshInstance)
 	mesh.set_surface_material(0, copperoxid)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-# func _process(delta):
-# 	pass
+func _process(delta):
+	for body in area.get_overlapping_areas():
+		if "chemical_name" in body:
+			self.set_meta("chemical", body.get("chemical_name"))
+
 func oxidize(delta, mat):
 	print("now oxidzing biaaatch")
 	timer -= delta
