@@ -52,6 +52,8 @@ func loadNode(idx, data):
 
 func saveNode(idx, _data = {}):
 	var node = get_node(sequenced_nodes[idx])
+	print("1")
+	print(sequenced_nodes[idx])
 	saved_nodes[idx] = node
 	remove_child(node)
 	var new_node = node.duplicate(7)

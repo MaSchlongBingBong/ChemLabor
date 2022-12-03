@@ -97,7 +97,7 @@ size = Vector3( 1, 1, 1 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 26 )
-sequenced_nodes = [ NodePath("Tablev2"), NodePath("Tablev2/Burner"), NodePath(""), NodePath("Tablev2/CopperPlate"), NodePath(""), NodePath("Tetrachlorethen"), NodePath("Cup"), NodePath(""), NodePath("Brom"), NodePath("Tablev2/Pressure&Wash") ]
+sequenced_nodes = [ NodePath("Tablev2"), NodePath("Tablev3"), NodePath("Tablev2/Pressure&Wash"), NodePath("Tablev2/Burner"), NodePath("Tablev2/CopperPlate"), NodePath("Tablev2/Cube"), NodePath("Tetrachlorethen"), NodePath("Brom"), NodePath("Cup"), NodePath("Cup2"), NodePath("Cup3"), NodePath("Cup4"), NodePath("Tablev3/Burner"), NodePath("Tablev3/CopperPlate"), NodePath("SettingsBoard") ]
 
 [node name="FPController" parent="." instance=ExtResource( 1 )]
 
