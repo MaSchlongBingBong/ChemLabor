@@ -19,7 +19,8 @@ func changeColor(copperoxid):
 func _process(delta):
 	for body in area.get_overlapping_areas():
 		if "chemical_name" in body:
-			self.set_meta("chemical", body.get("chemical_name"))
+			if body.chemical_name != "":
+				self.set_meta("chemical", body.get("chemical_name"))
 
 func oxidize(delta, mat):
 	print("now oxidzing biaaatch")
