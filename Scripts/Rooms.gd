@@ -1,16 +1,19 @@
 extends Spatial
 
+var font
+var cvitem
+var vport = Viewport.new()
+var vport_img
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export var font_size = 60 
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	self.add_child(vport)
+	cvitem = Control.new()
+	cvitem.set_script(load("res://Scripts/chalkboard.gd"))
+	vport.add_child(cvitem)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func drawString(s):
+	cvitem.set_meta("content", s)
+	cvitem.set_meta("font_size", font_size)
+	cvitem.draw()
