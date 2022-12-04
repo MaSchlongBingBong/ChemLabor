@@ -106,7 +106,6 @@ sequenced_nodes = [ NodePath("Burner"), NodePath("Burner2"), NodePath("CopperPla
 [node name="FPController" parent="." instance=ExtResource( 1 )]
 
 [node name="ARVRCamera" parent="FPController" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.426, 1.8, 0 )
 current = true
 far = 1000.0
 

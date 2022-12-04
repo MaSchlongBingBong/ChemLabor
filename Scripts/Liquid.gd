@@ -42,7 +42,7 @@ func reaction(chemName, chemName2):
 		#idk make chem1 more blurry?
 		print("Shit is shitting")
 
-
+ 
 func empty(vol):
 	volume -= vol
 	calcLiquid()
