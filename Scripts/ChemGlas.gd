@@ -30,7 +30,6 @@ func _ready():
 	drawString(chemical_name)
 	liquid = $Liquid
 	chemColor = Global.chemColors.get(chemical_name, Color(1,0,1,1))
-	chemColor.a = 0.8
 	liquid.get_active_material(0).albedo_color = chemColor
 
 

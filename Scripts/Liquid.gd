@@ -22,6 +22,8 @@ func setName(name):
 	liquid.visible = true
 	if name == "":
 		liquid.visible = false
+	print(chemical_name)
+	print(liquid.get_active_material(0).albedo_color)
 
 func fill(vol, chemName):
 	if self.chemical_name == "" or self.chemical_name == chemName:
@@ -39,8 +41,7 @@ func fill(vol, chemName):
 func reaction(chemName, chemName2):
 	print("reaction starting")
 	if chemName == "Silbernitrate" and chemName2 == "Dibromethan":
-		
-		print("Shit is shitting")
+		liquid.get_active_material(0).albedo_color.a = 0.8
 
  
 func empty(vol):

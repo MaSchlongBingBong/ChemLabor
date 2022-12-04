@@ -52,11 +52,12 @@ func _onEthenPressed(body):
 	if body.is_in_group("Hands"):
 		if liquidColor.albedo_color.a > 0.125:
 			ethen.emitting = !ethen.emitting
+			yield(get_tree().create_timer(10), "timeout")
 
 func _onDbePressed(body):
 	print("dbe")
 	if body.is_in_group("Hands"):
 		if liquid.scale > 0.001:	
 			dbe.emitting = !dbe.emitting
-			yield(get_tree().create_timer(3), "timeout")
+			yield(get_tree().create_timer(10), "timeout")
 
