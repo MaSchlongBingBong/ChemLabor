@@ -523,7 +523,7 @@ font_size = 80
 
 [connection signal="body_entered" from="Tablev2/Area" to="Tablev2" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Tablev2/water2" to="Tablev2" method="_onFill"]
-[connection signal="pressed_on" from="resetButton" to="." method="reset"]
+[connection signal="pressed_on" from="resetButton" to="." method="_on_loadButton_pressed"]
 [connection signal="body_entered" from="Cup" to="Cup" method="_on_Cup_body_entered"]
 [connection signal="body_entered" from="Cup2" to="Cup2" method="_on_Cup_body_entered"]
 [connection signal="body_entered" from="Cup3" to="Cup3" method="_on_Cup_body_entered"]

@@ -22,3 +22,8 @@ func _on_AudioButton_pressed_on():
 
 func _on_AudioButton_pressed_off():
 	AudioServer.set_bus_mute(0,true)
+
+
+func _on_ResetButton_pressed_on():
+	Global.data["sequence"].reset()
+	pass # Replace with function body.

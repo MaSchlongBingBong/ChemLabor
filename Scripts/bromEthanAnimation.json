@@ -113,11 +113,11 @@
     "steps": [
         {
             "type": "Nop",
-            "duration": 5
+            "duration": 18
         },
         {
             "type": "moveElectrons",
-            "duration": 1,
+            "duration": 10,
             "data": {
                 "idx": 5,
                 "electron": 1
@@ -125,21 +125,21 @@
         },
         {
             "type": "deleteBond",
-            "duration": 1,
+            "duration": 0,
             "data": {
                 "idx": 5
             }
         },
         {
             "type": "deleteBond",
-            "duration": 1,
+            "duration": 6,
             "data": {
                 "idx": 0
             }
         },
         {
             "type": "createBond",
-            "duration": 0,
+            "duration": 1,
             "data": {
                 "from": 0,
                 "to": 6
@@ -147,7 +147,7 @@
         },
         {
             "type": "createBond",
-            "duration": 0.5,
+            "duration": 5.5,
             "data": {
                 "from": 1,
                 "to": 6

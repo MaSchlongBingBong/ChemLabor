@@ -12,6 +12,8 @@ var currIndex = -1
 var counter = 0
 var currTimeout = 0
 
+var audioPosition
+
 var paused = false
 var playing = false
 

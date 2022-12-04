@@ -9,7 +9,8 @@ export(Array,NodePath) var sequenced_nodes
 
 var disabledNodes = {}
 
-var saved_nodes = {}
+var reset_nodes = {}
+var save_nodes = {}
 var playing_audios = {}
 
 var timer = 0
@@ -28,37 +29,28 @@ func _ready():
 	var res = JSON.parse(data).result
 	print(res["name"])
 	seq = res.seq
+	Global.data["sequence"] = self
 
-	for node in range(len(sequenced_nodes)):
-		if sequenced_nodes[node] == null:
+	save(reset_nodes)
+
+func load(save_array):
+	for i in range(len(save_array)):
+		var current = get_node(sequenced_nodes[i])
+		var saved = save_array[i]
+		if current == null or saved == null:
 			continue
-		saveNode(node)
+		current.queue_free()
+		add_child(saved)
+		sequenced_nodes[i] = saved.get_path()
+		save_array[i] = saved.duplicate(7)
 
-func loadNode(idx, data):
-	var saved = saved_nodes[idx]
-	if saved == null:
-		return
-	var current = get_node(sequenced_nodes[idx])
-	if current == null:
-		print(sequenced_nodes[idx])
-		return
-	current.queue_free()
-	add_child(saved)
-	sequenced_nodes[idx] = saved.get_path()
-	if data.erase:
-		saved_nodes.erase(idx)
-	else:
-		saved_nodes[idx] = saved.duplicate(7)
-
-func saveNode(idx, _data = {}):
-	var node = get_node(sequenced_nodes[idx])
-	print("1")
-	print(sequenced_nodes[idx])
-	saved_nodes[idx] = node
-	remove_child(node)
-	var new_node = node.duplicate(7)
-	add_child(new_node)
-	sequenced_nodes[idx] = new_node.get_path()
+func save(save_array):
+	for i in range(len(sequenced_nodes)):
+		var node = sequenced_nodes[i]
+		if node == null:
+			continue
+		var copy = node.duplicate(7)
+		save_array[i] = copy.get_path()
 	
 
 func playAudio(idx, data):
@@ -84,19 +76,30 @@ func _process(delta):
 
 	var current = seq[step]
 	print("current step("+str(step)+") : " + str(current))
-	var node = current.node
-	if node == null:
-		timer = current.data.time
-	else:
-		if has_method(current.function):
-			call_deferred(current.function, current.node, current.data)
-		else:
-			printerr("function " + current.function + " not found")
+	match current.function:
+		"Nop":
+			timer = current.data.time
+		"Save":
+			save(save_nodes)
+		"Load":
+			load(save_nodes)
+		"PlayAudio":
+			var node = get_tree().get_nodes_in_group("AudioPlayer")[0]
+			var audio = node.get_child(current.data.idx)
+			if audio:
+				audio.play(current.data.pos)
+				playing_audios[current.data.idx] = {pos = current.data.pos, duration = current.data.duration, node = audio}
+		_: 
+			print("function " + current.function + " not found")
 	
 	step += 1
 	if step >= len(seq):
 		step = -1
 
 func reset():
-	for idx in range(len(sequenced_nodes)):
-		loadNode(idx,{erase = false})
+	load(reset_nodes)
+
+
+func _on_loadButton_pressed():
+	load(save_nodes)
+	pass # Replace with function body.
