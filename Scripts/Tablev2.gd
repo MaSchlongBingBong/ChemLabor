@@ -9,7 +9,7 @@ var area
 func _ready():
 	water = Global.loadScene(self, load("res://Scene/flowingLiquid.tscn")).get_child(0)
 	area = Global.get_children_of_type(self, Area)[1]
-	water.process_material.color = Color(103, 93, 188, 77)
+	water.process_material.color = Color(87, 72, 232, 77)
 	water.emitting = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 

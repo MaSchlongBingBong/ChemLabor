@@ -30,8 +30,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	dbe.process_material.color = liquidColor.albedo_color
 	if dbe.emitting:
+		dbe.process_material.color = liquidColor.albedo_color
 		for body in area.get_overlapping_bodies():
 			if body.has_method("fill"):
 				body.call("fill", delta, "Dibromethan")
@@ -49,11 +49,15 @@ func _process(delta):
 		
 
 func _onEthenPressed(body):
+	print("ethen")
 	if body.is_in_group("Hands"):
-		if liquidColor.a > 0.125:
+		if liquidColor.albedo_color.a > 0.125:
 			ethen.emitting = !ethen.emitting
 
 func _onDbePressed(body):
+	print("dbe")
 	if body.is_in_group("Hands"):
-		if liquid.mesh.scale > 0.001:	
+		if liquid.scale > 0.001:	
 			dbe.emitting = !dbe.emitting
+			yield(get_tree().create_timer(3), "timeout")
+

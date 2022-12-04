@@ -39,7 +39,7 @@ func fill(vol, chemName):
 
 func reaction(chemName, chemName2):
 	if chemName == "Silbernitrate" and chemName2 == "Dibromethan":
-		#idk make chem1 more blurry?
+		# idk make chem1 more blurry?
 		print("Shit is shitting")
 
  
