@@ -25,7 +25,6 @@ func _ready():
 	dbe.name = "Dibromethan"
 	dbe = dbe.get_child(0)
 	dbe.emitting = false
-	
 	# Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
