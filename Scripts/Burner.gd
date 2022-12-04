@@ -17,6 +17,8 @@ func _ready():
 	fire = Global.loadScene(self, load("res://Scene/Fire.tscn")).get_child(0)
 	fire.emitting = true
 	mat = fire.process_material
+	mat.color = Color("#1624ff")
+	fire.process_material = mat
 	fire.scale.y = 0.25 
 	fire.translation.y = 0.19
 	# Replace with function body.
@@ -28,15 +30,16 @@ func action():
 func _process(delta):
 	if fire.emitting:
 		for body in area.get_overlapping_bodies():
-			if body.has_method("oxidize"): #and body.get_meta("chemical") == "Dibromethan"#
+			if body.has_method("oxidize"):
+				print("oxidizing")
 				copperMat = Global.get_child_of_type(body, MeshInstance).get_active_material(0)
-				body.call("oxidize", delta, copperoxid)
 				mat.color = Color("#0e7310")
-				fire.process_material = mat		
-				if copperMat == copperoxid:
-					if body.get_meta("chemical") == "Dibromethan":
-						mat.color = Color("#0e7310")
-						fire.process_material = mat						
-					mat.color = Color("#1624ef")
+				fire.process_material = mat
+				body.call("oxidize", delta, copperoxid)
+				if copperMat == copperoxid and body.get_meta("chemical") != "Dibromethan":
+					mat.color = Color("#1624ff")
 					fire.process_material = mat
-
+		if area.get_overlapping_bodies().empty():
+			mat.color = Color("#1624ff")
+			fire.process_material = mat
+					

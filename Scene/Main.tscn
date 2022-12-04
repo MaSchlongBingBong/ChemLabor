@@ -91,7 +91,7 @@ margin = 0.001
 points = PoolVector3Array( 0.105269, 0.0119, 0.0579793, -0.101607, -0.0119, -0.0555284, -0.101607, -0.0119, 0.0559694, -0.10527, 0.0119, -0.0575383, 0.101606, -0.0119, -0.0555284, -0.10527, 0.0119, 0.0579793, 0.105269, 0.0119, -0.0575383, 0.101606, -0.0119, 0.0559694 )
 
 [sub_resource type="BoxShape" id=88]
-extents = Vector3( 0.10386, 0.001, 0.0540696 )
+extents = Vector3( 0.134305, 0.026605, 0.0540696 )
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.5, 0.5, 0.5 )
@@ -109,7 +109,7 @@ sequenced_nodes = [ NodePath("Burner"), NodePath("Burner2"), NodePath("CopperPla
 [node name="FPController" parent="." instance=ExtResource( 1 )]
 
 [node name="ARVRCamera" parent="FPController" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.029, 1.093, -2.859 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.636, 1.093, -2.859 )
 current = true
 far = 1000.0
 
@@ -211,11 +211,11 @@ fillVolume = 200
 font_size = 80
 
 [node name="Cup" parent="." instance=ExtResource( 32 )]
-transform = Transform( -0.112267, 0, 0.993678, 0, 1, 0, -0.993678, 0, -0.112267, 0.810123, 1.02017, -3.45404 )
+transform = Transform( -0.112267, 0, 0.993678, 0, 1, 0, -0.993678, 0, -0.112267, 1.54603, 1.02017, -3.45404 )
 script = ExtResource( 34 )
 reset_transform_on_pickup = false
-volume = 0
-chemical_name = ""
+volume = 50
+chemical_name = "Dibromethan"
 emptyScale = 0.002
 fullScale = 0.05
 emptyRate = 50
@@ -289,20 +289,6 @@ fillVolume = 50
 [node name="Particles" parent="Cup3" instance=ExtResource( 35 )]
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.034508, 0 )
 
-[node name="Cup4" parent="." instance=ExtResource( 32 )]
-transform = Transform( -0.112267, 0, 0.993678, 0, 1, 0, -0.993678, 0, -0.112267, -5.014, 1.61793, -0.898221 )
-script = ExtResource( 34 )
-reset_transform_on_pickup = false
-volume = 0
-chemical_name = ""
-emptyScale = 0.002
-fullScale = 0.05
-emptyRate = 50
-fillVolume = 50
-
-[node name="Particles" parent="Cup4" instance=ExtResource( 35 )]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.034508, 0 )
-
 [node name="Tablev3" parent="." instance=ExtResource( 13 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11.8585, 0.51217, -3.37379 )
 
@@ -322,6 +308,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02, 0.565, 0.01 )
 [node name="CollisionShape" type="CollisionShape" parent="Tablev3/water2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00734115, -0.155909, -0.00214219 )
 shape = SubResource( 84 )
+
+[node name="Cup4" parent="." instance=ExtResource( 32 )]
+transform = Transform( -0.112267, 0, 0.993678, 0, 1, 0, -0.993678, 0, -0.112267, -5.014, 1.61793, -0.898221 )
+script = ExtResource( 34 )
+reset_transform_on_pickup = false
+volume = 0
+chemical_name = ""
+emptyScale = 0.002
+fullScale = 0.05
+emptyRate = 50
+fillVolume = 50
+
+[node name="Particles" parent="Cup4" instance=ExtResource( 35 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.034508, 0 )
 
 [node name="Silbernitrate" parent="." instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.35922, 1.656, -1.05316 )
@@ -419,9 +419,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25423, 0 )
 shape = SubResource( 78 )
 
 [node name="CopperPlate" type="RigidBody" parent="." groups=["copperPlate"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.619, 1.09, -3.471 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.63321, 1.41358, -3.471 )
 collision_layer = 131073
 collision_mask = 131073
+gravity_scale = 0.0
 script = ExtResource( 25 )
 reset_transform_on_pickup = false
 picked_up_layer = 1
@@ -530,9 +531,9 @@ shape = SubResource( 86 )
 [connection signal="body_entered" from="Cup" to="Cup" method="_on_Cup_body_entered"]
 [connection signal="body_entered" from="Cup2" to="Cup2" method="_on_Cup_body_entered"]
 [connection signal="body_entered" from="Cup3" to="Cup3" method="_on_Cup_body_entered"]
-[connection signal="body_entered" from="Cup4" to="Cup4" method="_on_Cup_body_entered"]
 [connection signal="body_entered" from="Tablev3/Area" to="Tablev2" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Tablev3/water2" to="Tablev2" method="_onFill"]
+[connection signal="body_entered" from="Cup4" to="Cup4" method="_on_Cup_body_entered"]
 [connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onEthenPressed"]
 [connection signal="body_entered" from="Pressure&Wash/WashCanAction" to="Pressure&Wash" method="_onDbePressed"]
 [connection signal="body_entered" from="Burner2/Area" to="Burner2" method="_onContact"]

@@ -19,6 +19,7 @@ func changeColor(copperoxid):
 func _process(delta):
 	for body in area.get_overlapping_bodies():
 		if "chemical_name" in body:
+			print("has chemical_name")
 			if body.chemical_name != "":
 				self.set_meta("chemical", body.get("chemical_name"))
 
