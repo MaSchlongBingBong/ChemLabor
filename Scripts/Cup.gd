@@ -40,4 +40,3 @@ func _process(delta):
 		if empty:
 			setName("")
 
-

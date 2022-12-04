@@ -34,6 +34,13 @@ func fill(vol, chemName):
 	else:
 		# DO THE MIXING IN HERE BRO !
 		print("mixing " + self.chemical_name + " and " + chemName + " together doesn't work, voiding " + chemName)
+		reaction(self.chemical_name, chemName)
+
+
+func reaction(chemName, chemName2):
+	if chemName == "Silbernitrate" and chemName2 == "Dibromethan":
+		#idk make chem1 more blurry?
+		print("Shit is shitting")
 
 
 func empty(vol):

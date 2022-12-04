@@ -244,15 +244,14 @@ mache folgende Proben:
 font = SubResource( 87 )
 
 [node name="Experiment 2" type="Label3D" parent="Room"]
-transform = Transform( 0.28, 0, 0, 0, 0.304, 0, 0, 0, 1, -4.5963, 2.45566, -11.0178 )
+transform = Transform( 0.28, 0, 0, 0, 0.304, 0, 0, 0, 1, -4.5963, 2.46364, -11.0178 )
 text = "Experiment 2:
 
 Experiment 1 wird wiederholt, jedoch soll  anstatt Ethen   
  Tetrachlorethen in Brom hineingegeben werden                  
 
 Aufgaben:                                                                      
-    
-1. Fuehre das Experiment aus                         
+    1. Fuehre das Experiment aus                         
 2. Fuelle das Produkt in einem Becherglass und 
 mache folgende Proben:                           
 	-Beilsteinprobe                      
