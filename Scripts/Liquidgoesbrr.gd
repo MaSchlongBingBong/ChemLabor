@@ -15,27 +15,34 @@ var newAlpha
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	liquid = Global.get_children_of_type(self, MeshInstance)[1]
-	liquidColor = liquid.get_surface_material(0).albedo_color
+	liquidColor = liquid.get_surface_material(0)
 	area = Global.get_children_of_type(self, Area)[2]
-	ethen = Global.loadScene(self, load("res://Scene/EthenParticals.tscn")).get_child(0)
-	ethen.emitting = false
-	dbe = Global.loadScene(self, load("res://Scene/flowingLiquid.tscn")).get_child(0)
-	dbe.emitting = false
+	ethen = Global.loadScene(self, load("res://Scene/EthenParticals.tscn"))
+	ethen.name = "Ethen"
+	ethen = ethen.get_child(0)
+	ethen.emitting = true
+	dbe = Global.loadScene(self, load("res://Scene/flowingLiquid.tscn"))
+	dbe.name = "Dibromethan"
+	dbe = dbe.get_child(0)
+	dbe.emitting = true
 	
 	# Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	dbe.process_material.color = liquidColor.albedo_color
 	if dbe.emitting:
 		for body in area.get_overlapping_bodies():
 			if body.has_method("fill"):
-				body.call("fill", delta, "Dibromethan")
-				Global.scaleLiquid(liquid, 0.02, delta)
+				body.call("fill", delta*10, "Dibromethan")
+		if !Global.scaleLiquid(liquid, 0.001, delta/10):
+			print("Done Scaling")
+			dbe.emitting = false
 	if ethen.emitting:
-		newAlpha = lerp(liquidColor.a, 0, delta/10)
-		if liquidColor.a >= 0.125:
-			liquidColor.a = newAlpha
-			print(liquidColor.a)
+		newAlpha = lerp(liquidColor.albedo_color.a, 0, delta/10)
+		if liquidColor.albedo_color.a >= 0.25:
+			liquidColor.albedo_color.a = newAlpha
+			liquid.set_surface_material(0, liquidColor)
 		else:
 			print("Stopping ethenflow")
 			ethen.emitting = !ethen.emitting
@@ -43,8 +50,10 @@ func _process(delta):
 
 func _onEthenPressed(body):
 	if body.is_in_group("Hands"):
-		ethen.emitting = !ethen.emitting
+		if liquidColor.a > 0.125:
+			ethen.emitting = !ethen.emitting
 
 func _onDbePressed(body):
 	if body.is_in_group("Hands"):
-		dbe.emitting = !dbe.emitting
+		if liquid.mesh.scale > 0.001:	
+			dbe.emitting = !dbe.emitting
