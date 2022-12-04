@@ -20,11 +20,11 @@ func _ready():
 	ethen = Global.loadScene(self, load("res://Scene/EthenParticals.tscn"))
 	ethen.name = "Ethen"
 	ethen = ethen.get_child(0)
-	ethen.emitting = true
+	ethen.emitting = false
 	dbe = Global.loadScene(self, load("res://Scene/flowingLiquid.tscn"))
 	dbe.name = "Dibromethan"
 	dbe = dbe.get_child(0)
-	dbe.emitting = true
+	dbe.emitting = false
 	
 	# Replace with function body.
 
@@ -34,7 +34,7 @@ func _process(delta):
 	if dbe.emitting:
 		for body in area.get_overlapping_bodies():
 			if body.has_method("fill"):
-				body.call("fill", delta*10, "Dibromethan")
+				body.call("fill", delta, "Dibromethan")
 		if !Global.scaleLiquid(liquid, 0.001, delta/10):
 			print("Done Scaling")
 			dbe.emitting = false
