@@ -17,10 +17,11 @@ func changeColor(copperoxid):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	for body in area.get_overlapping_areas():
-		if "chemical_name" in body:
-			if body.chemical_name != "":
-				self.set_meta("chemical", body.get("chemical_name"))
+	# for body in area.get_overlapping_areas():
+	# 	if "chemical_name" in body:
+	# 		if body.chemical_name != "":
+	# 			self.set_meta("chemical", body.get("chemical_name"))
+	pass
 
 func oxidize(delta, mat):
 	print("now oxidzing biaaatch")

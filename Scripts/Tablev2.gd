@@ -19,7 +19,9 @@ func _process(delta):
 		for body in area.get_overlapping_bodies():
 			if body.has_method("fill"):
 				body.call("fill", delta, "H2")
+		
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("Hands"):
 		water.emitting = !water.emitting
+		yield(get_tree().create_timer(3), "timeout")
