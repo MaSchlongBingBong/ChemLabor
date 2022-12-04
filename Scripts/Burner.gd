@@ -32,13 +32,11 @@ func _process(delta):
 				copperMat = Global.get_child_of_type(body, MeshInstance).get_active_material(0)
 				body.call("oxidize", delta, copperoxid)
 				mat.color = Color("#0e7310")
-				fire.process_material = mat				
+				fire.process_material = mat		
 				if copperMat == copperoxid:
 					if body.get_meta("chemical") == "Dibromethan":
 						mat.color = Color("#0e7310")
 						fire.process_material = mat						
 					mat.color = Color("#1624ef")
 					fire.process_material = mat
-		mat.color = Color("#1624ef")
-		fire.process_material = mat
 
