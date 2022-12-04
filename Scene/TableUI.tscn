@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Font/CALIBRI.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://Themes/default.tres" type="Theme" id=2]
-[ext_resource path="res://Scripts/buttons.tres" type="ButtonGroup" id=4]
+[ext_resource path="res://Materials/buttons.tres" type="ButtonGroup" id=4]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.13, 0.13, 0.13, 0.462745 )

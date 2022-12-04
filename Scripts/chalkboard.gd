@@ -1,9 +1,8 @@
-extends Control
-
-var font 
+tool
+extends Viewport
 
 func _ready():
-    font = DynamicFont.new()
-    font.font_data = load("res://Font/Chalktastic-x1nR.ttf")
-    update()
+    pass
 
+func _process(delta):
+    size = $Label.rect_size 
