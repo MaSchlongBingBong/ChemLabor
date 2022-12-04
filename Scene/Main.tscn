@@ -419,10 +419,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25423, 0 )
 shape = SubResource( 78 )
 
 [node name="CopperPlate" type="RigidBody" parent="." groups=["copperPlate"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91529, 1.41782, -3.47053 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.619, 1.09, -3.471 )
 collision_layer = 131073
 collision_mask = 131073
-gravity_scale = 0.0
 script = ExtResource( 25 )
 reset_transform_on_pickup = false
 picked_up_layer = 1
