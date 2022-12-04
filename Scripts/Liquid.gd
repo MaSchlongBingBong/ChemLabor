@@ -30,7 +30,6 @@ func fill(vol, chemName):
 			volume = fillVolume
 		calcLiquid()
 		setName(chemName)
-	
 	else:
 		# DO THE MIXING IN HERE BRO !
 		print("mixing " + self.chemical_name + " and " + chemName + " together doesn't work, voiding " + chemName)
@@ -38,6 +37,7 @@ func fill(vol, chemName):
 
 
 func reaction(chemName, chemName2):
+	print("reaction starting")
 	if chemName == "Silbernitrate" and chemName2 == "Dibromethan":
 		# idk make chem1 more blurry?
 		print("Shit is shitting")

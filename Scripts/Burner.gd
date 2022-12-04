@@ -27,19 +27,18 @@ func action():
 
 func _process(delta):
 	if fire.emitting:
-		print(area)
 		for body in area.get_overlapping_bodies():
 			if body.has_method("oxidize"): #and body.get_meta("chemical") == "Dibromethan"#
 				copperMat = Global.get_child_of_type(body, MeshInstance).get_active_material(0)
 				body.call("oxidize", delta, copperoxid)
-				print("green fire")
 				mat.color = Color("#0e7310")
-				fire.process_material = mat
+				fire.process_material = mat				
 				if copperMat == copperoxid:
-					print("blue fire")
+					if body.get_meta("chemical") == "Dibromethan":
+						mat.color = Color("#0e7310")
+						fire.process_material = mat						
 					mat.color = Color("#1624ef")
 					fire.process_material = mat
-		print("blue fire 2")
 		mat.color = Color("#1624ef")
 		fire.process_material = mat
 

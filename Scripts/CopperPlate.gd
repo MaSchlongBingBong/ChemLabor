@@ -24,7 +24,6 @@ func _process(delta):
 	pass
 
 func oxidize(delta, mat):
-	print("now oxidzing biaaatch")
 	timer -= delta
 	if timer <= 0:
 		changeColor(mat)

@@ -106,6 +106,7 @@ sequenced_nodes = [ NodePath("Burner"), NodePath("Burner2"), NodePath("CopperPla
 [node name="FPController" parent="." instance=ExtResource( 1 )]
 
 [node name="ARVRCamera" parent="FPController" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.488, 1.093, -2.859 )
 current = true
 far = 1000.0
 
@@ -163,9 +164,6 @@ transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 2.6436, 2.10241, -10.107
 [node name="Tablev2" parent="." instance=ExtResource( 13 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.548906, 0.481629, -3.72051 )
 script = ExtResource( 37 )
-
-[node name="water" parent="Tablev2" instance=ExtResource( 36 )]
-transform = Transform( 0.013, 0, 0, 0, 0.063, 0, 0, 0, 0.013, -2.01649, 0.56485, 0.00053072 )
 
 [node name="Area" type="Area" parent="Tablev2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35412, 0.626231, -2.38419e-07 )
@@ -530,8 +528,6 @@ shape = SubResource( 86 )
 [connection signal="body_entered" from="Tablev3/water2" to="Tablev2" method="_onFill"]
 [connection signal="body_entered" from="Pressure&Wash/PressureCanButton" to="Pressure&Wash" method="_onEthenPressed"]
 [connection signal="body_entered" from="Pressure&Wash/WashCanAction" to="Pressure&Wash" method="_onDbePressed"]
-[connection signal="body_entered" from="Burner/Area" to="Burner" method="_onContact"]
-[connection signal="body_exited" from="Burner/Area" to="Burner" method="_onExit"]
 [connection signal="body_entered" from="Burner2/Area" to="Burner2" method="_onContact"]
 [connection signal="body_exited" from="Burner2/Area" to="Burner2" method="_onExit"]
 

@@ -20,8 +20,7 @@ func _ready():
 	var res = JSON.parse(data).result
 	for k in res:
 		var v = res[k]
-		var color = Color8(v[0], v[1], v[2])
-		color.a = 0.8
+		var color = Color8(v[0], v[1], v[2], v[3])
 		chemColors[k] = color
 
 

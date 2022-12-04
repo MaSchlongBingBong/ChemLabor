@@ -5,14 +5,21 @@ extends Spatial
 # var b = "text"
 var water
 var area 
+var mat 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	water = Global.loadScene(self, load("res://Scene/flowingLiquid.tscn")).get_child(0)
+	water = Global.loadScene(self, load("res://Scene/flowingLiquid.tscn"))
+	water.name = "H2"
+	water.translation = Vector3(-2.016, 0.5666, 0.001)
+	water.scale = Vector3(0.012, 0.058, 0.012)
+	water = water.get_child(0)
+	mat = water.process_material
 	area = Global.get_children_of_type(self, Area)[1]
-	water.process_material.color = Color(87, 72, 232, 77)
-	water.emitting = false
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-
+	mat.color = Global.chemColors.get("H2")
+	print("water")
+	print(mat.color)
+	water.process_material = mat
+	water.emitting = true
 
 func _process(delta):
 	if water.emitting:
