@@ -31,9 +31,9 @@ func _ready():
 	seq = res.seq
 	Global.data["sequence"] = self
 
-	save(reset_nodes)
+	seq_save(reset_nodes)
 
-func load(save_array):
+func seq_load(save_array):
 	for i in range(len(save_array)):
 		var current = get_node(sequenced_nodes[i])
 		var saved = save_array[i]
@@ -44,13 +44,13 @@ func load(save_array):
 		sequenced_nodes[i] = saved.get_path()
 		save_array[i] = saved.duplicate(7)
 
-func save(save_array):
+func seq_save(save_array):
 	for i in range(len(sequenced_nodes)):
-		var node = sequenced_nodes[i]
+		var node = get_node(sequenced_nodes[i])
 		if node == null:
 			continue
 		var copy = node.duplicate(7)
-		save_array[i] = copy.get_path()
+		save_array[i] = copy
 	
 
 func playAudio(idx, data):
@@ -80,9 +80,9 @@ func _process(delta):
 		"Nop":
 			timer = current.data.time
 		"Save":
-			save(save_nodes)
+			seq_save(save_nodes)
 		"Load":
-			load(save_nodes)
+			seq_load(save_nodes)
 		"PlayAudio":
 			var node = get_tree().get_nodes_in_group("AudioPlayer")[0]
 			var audio = node.get_child(current.data.idx)
@@ -97,9 +97,9 @@ func _process(delta):
 		step = -1
 
 func reset():
-	load(reset_nodes)
+	seq_load(reset_nodes)
 
 
 func _on_loadButton_pressed():
-	load(save_nodes)
+	seq_load(save_nodes)
 	pass # Replace with function body.

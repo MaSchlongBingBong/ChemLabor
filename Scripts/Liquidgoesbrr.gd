@@ -5,7 +5,6 @@ var ethen
 var dbe   
 var liquid
 var liquidColor
-var newAlpha
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -38,9 +37,9 @@ func _process(delta):
 			print("Done Scaling")
 			dbe.emitting = false
 	if ethen.emitting:
-		newAlpha = lerp(liquidColor.albedo_color.a, 0, delta/10)
+		var newColor = lerp(liquidColor.albedo_color, Color(1,1,1,0), delta/10)
 		if liquidColor.albedo_color.a >= 0.25:
-			liquidColor.albedo_color.a = newAlpha
+			liquidColor.albedo_color = newColor
 			liquid.set_surface_material(0, liquidColor)
 		else:
 			print("Stopping ethenflow")
@@ -57,7 +56,7 @@ func _onEthenPressed(body):
 func _onDbePressed(body):
 	print("dbe")
 	if body.is_in_group("Hands"):
-		if liquid.scale > 0.001:	
+		if liquid.scale.y > 0.001:	
 			dbe.emitting = !dbe.emitting
 			yield(get_tree().create_timer(10), "timeout")
 

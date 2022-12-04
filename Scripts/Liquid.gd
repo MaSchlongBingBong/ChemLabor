@@ -40,8 +40,9 @@ func fill(vol, chemName):
 
 func reaction(chemName, chemName2):
 	print("reaction starting")
-	if chemName == "Silbernitrate" and chemName2 == "Dibromethan":
+	if (chemName == "Silbernitrate" and chemName2 == "Dibromethan") or (chemName2 == "Silbernitrate" and chemName == "Dibromethan"):
 		liquid.get_active_material(0).albedo_color.a = 0.8
+
 
  
 func empty(vol):

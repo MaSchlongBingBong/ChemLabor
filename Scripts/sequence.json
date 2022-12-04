@@ -10,20 +10,6 @@
             "data": {
                 "time": 5
             }
-        },
-        {
-            "function": "Load",
-            "data": {
-                "erase": false
-            }
-        },
-        {
-            "function": "PlayAudio",
-            "data": {
-                "idx": 0,
-                "pos": 14,
-                "duration": 5
-            }
         }
     ]
 }

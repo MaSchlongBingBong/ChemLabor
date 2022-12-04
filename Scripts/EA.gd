@@ -12,7 +12,8 @@ var currIndex = -1
 var counter = 0
 var currTimeout = 0
 
-var audioPosition
+var audioPosition = 0
+var audio
 
 var paused = false
 var playing = false
@@ -23,6 +24,7 @@ export(PackedScene) var electronParticle;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	audio = get_tree().get_nodes_in_group("AudioPlayer")[0].get_child(0)
 	loadMolecule()
 	generate_molecule()
 
@@ -42,11 +44,20 @@ func loadMolecule():
 func start_stop():
 	if playing:
 		paused = not paused
+		if paused:
+			audioPosition = audio.get_playback_position()
+			audio.stop()
+		else:
+			audio.play()
+			audio.seek(audioPosition)
 	else:
 		playAnim()
 	
 
 func playAnim():
+	audioPosition = 0
+	audio.play()
+	audio.seek(0)
 	playing = true
 	loadMolecule()
 	generate_molecule()

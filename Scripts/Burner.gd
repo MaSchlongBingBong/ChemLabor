@@ -13,8 +13,13 @@ var fire
 var timer = 10
 
 func _ready():
+	print("EXECUTING READY IN BURNER!!!!!")
 	area = Global.get_child_of_type(self, Area)
-	fire = Global.loadScene(self, load("res://Scene/Fire.tscn")).get_child(0)
+	fire = $FireScene
+	if not fire:
+		fire = Global.loadScene(self, load("res://Scene/Fire.tscn")).get_child(0)
+	else:
+		fire = fire.get_child(0)
 	fire.emitting = true
 	mat = fire.process_material
 	mat.color = Color("#1624ff")
